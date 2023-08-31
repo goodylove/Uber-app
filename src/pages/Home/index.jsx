@@ -3,33 +3,16 @@ import { useLocation } from "react-router-dom";
 
 import * as tt from "@tomtom-international/web-sdk-maps";
 import Button from "./../../components/Button/index";
+import Map from "../../components/map";
 
 export default function Home() {
+  const [locationValue, setLocationValue] = useState("");
+  const [destinationValue, setDestinationValue] = useState("");
   // 6.5244° N, 3.3792°
-  const longitude = 6.5244;
-  const latitude = 3.3792;
-  const [map, setMap] = useState({});
-  const mapEelement = useRef();
-  let center = [longitude, latitude];
-
-  useEffect(() => {
-    const map = tt.map({
-      key: "42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO",
-      container: mapEelement.current,
-      center: center,
-      zoom: 2,
-    });
-    // setMap(map);
-    map.on("load", () => {
-      new tt.Marker().setLngLat(center).addTo(map);
-    });
-  }, []);
 
   return (
     <main className="h-screen">
-      <div className="relative h-[45%] overflow-hidden w-full items-center justify-center">
-        <div ref={mapEelement} className="h-full w-full"></div>
-      </div>
+      <Map />
       <div className="bg-black rounded-t-3xl h-[55%] flex justify-center  items-center">
         <form action="" className="flex flex-col p-4 h-full mt-6 w-full">
           <p className="m-3 text-white text-center text-2xl">
@@ -39,11 +22,15 @@ export default function Home() {
             type="text"
             placeholder="Enter location"
             className="my-3 py-3 px-3 rounded-md outline-none"
+            value={locationValue}
+            onChange={(e) => setLocationValue(e.target.value)}
           />
           <input
             type="text"
             placeholder="Enter Destination"
             className="my-3 py-3 rounded-md outline-none px-3"
+            value={destinationValue}
+            onChange={(e) => setDestinationValue(e.target.value)}
           />
           <Button className="bg-purple text-white py-3 rounded-md my-3">
             Next
