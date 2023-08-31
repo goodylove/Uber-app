@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 
 import App from "./components/App";
 import ContextProvider from "./components/Context";
+// import "@tomtom-international/web-sdk-maps";
+// import "@tomtom-international/web-sdk-maps/dist/maps.css";
+
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
