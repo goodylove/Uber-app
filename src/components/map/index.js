@@ -31,3 +31,4 @@ function Map() {
 }
 
 export default Map;
+// https://api.tomtom.com/search/2/geocode/lagos%20nigeria.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO

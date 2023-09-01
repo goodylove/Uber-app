@@ -6,10 +6,6 @@ import Button from "./../../components/Button/index";
 import Map from "../../components/map";
 
 export default function Home() {
-  const [locationValue, setLocationValue] = useState("");
-  const [destinationValue, setDestinationValue] = useState("");
-  // 6.5244° N, 3.3792°
-
   return (
     <main className="h-screen">
       <Map />

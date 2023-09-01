@@ -16,7 +16,7 @@ const ContextProvider = ({ children }) => {
     return () => unsub();
   }, []);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <context.Provider value={{ currentUser }}>{children}</context.Provider>

@@ -35,7 +35,7 @@ export const useSignUp = () => {
         formData.email,
         formData.password
       );
-      console.log(res);
+      // console.log(res);
 
       const storageRef = ref(storage, `images/${userImage}`);
 
