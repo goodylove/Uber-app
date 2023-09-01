@@ -1,6 +1,7 @@
 import * as tt from "@tomtom-international/web-sdk-maps";
-import Button from "./../../components/Button/index";
+
 import { useEffect, useRef, useState } from "react";
+import Button from "./../../components/Button/index";
 
 function Map() {
   const longitude = 6.5244;
