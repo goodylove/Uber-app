@@ -17,9 +17,11 @@ function Map() {
       zoom: 2,
     });
     // setMap(map);
-    map.on("load", () => {
-      new tt.Marker().setLngLat(center).addTo(map);
-    });
+
+    const addToMap = () => {
+      let marker = new tt.Marker().setLngLat(center).addTo(map);
+    };
+    addToMap();
   }, []);
   return (
     <div className="relative h-[45%] overflow-hidden w-full items-center justify-center">
