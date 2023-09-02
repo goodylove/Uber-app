@@ -7,6 +7,7 @@ import Welcome from "../../pages/auth/welcome";
 import PageWrapper from "../PageWrapper";
 import SignIn from "./../../pages/auth/Signin/index";
 import SignUp from "./../../pages/auth/Signup/index";
+import ChooseRide from "../../pages/ChooseRide";
 
 export const ROUTER = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ export const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Home />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTHS.chooseride,
+        element: (
+          <PageWrapper>
+            <ChooseRide />
           </PageWrapper>
         ),
       },
