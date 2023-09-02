@@ -10,15 +10,8 @@ import { context } from "../../components/Context";
 
 export default function Home() {
   const { currentUser } = useContext(context);
-  const {
-    locationValue,
-    destinationValue,
-    setLocationValue,
-    setDestinationValue,
-    locationGeocod,
-    destinationGeocod,
-    handleSubmit,
-  } = useGetGeocod();
+  const { locationGeocod, destinationGeocod, handleSubmit } = useGetGeocod();
+  console.log(locationGeocod, destinationGeocod);
   return (
     <main className="h-screen relative">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
@@ -43,15 +36,11 @@ export default function Home() {
             type="text"
             placeholder="Enter location"
             className="my-3 py-3 px-3 rounded-md outline-none"
-            value={locationValue}
-            onChange={(e) => setLocationValue(e.target.value)}
           />
           <input
             type="text"
             placeholder="Enter Destination"
             className="my-3 py-3 rounded-md outline-none px-3"
-            value={destinationValue}
-            onChange={(e) => setDestinationValue(e.target.value)}
           />
           <Button
             className="bg-purple text-white py-3 rounded-md my-3"

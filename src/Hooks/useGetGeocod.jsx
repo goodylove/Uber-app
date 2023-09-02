@@ -1,24 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { CLIENT_ROUTHS } from "./../constants/routes";
 
 function useGetGeocod() {
-  const [locationValue, setLocationValue] = useState("");
-  const [destinationValue, setDestinationValue] = useState("");
-
+  const navigate = useNavigate();
   const [locationGeocod, setLocationGeocode] = useState(null);
   const [destinationGeocod, setDestinationGeocod] = useState(null);
 
-  const getGeocordinateLoction = async (value, callback) => {
+  const getGeocordinateLoction = async (value) => {
     try {
       const res = await fetch(
         `https://api.tomtom.com/search/2/geocode/${value}.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO`
       );
       const data = await res.json();
       if (data) {
-        const result = data?.results[0].position;
-        const outPut = Object.values(result);
-        callback(outPut);
-        console.log(locationGeocod, destinationGeocod);
+        const result = data?.results[0]?.position;
+        const outPut = Object?.values(result);
+        setLocationGeocode(outPut);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const getGeocordinateDest = async (value) => {
+    try {
+      const res = await fetch(
+        `https://api.tomtom.com/search/2/geocode/${value}.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO`
+      );
+      const data = await res.json();
+      if (data) {
+        const result = data?.results[0]?.position;
+        const outPut = Object?.values(result);
+        setDestinationGeocod(outPut);
       }
     } catch (error) {
       console.log(error.message);
@@ -28,23 +43,23 @@ function useGetGeocod() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let locationValue = e.target[0].value;
+    let destinationValue = e.target[1].value;
+
     if (locationValue === "" && destinationValue === "") {
       toast.error("Please  fill out the inputs");
     }
-    calFun();
+    update(locationValue, destinationValue);
+    locationValue = "";
+    destinationValue = "";
+    navigate(CLIENT_ROUTHS.chooseride);
   };
-
-  const calFun = useCallback(async () => {
-    await getGeocordinateLoction(locationValue, setLocationGeocode);
-    await getGeocordinateLoction(destinationValue, setDestinationGeocod);
-    console.log(locationGeocod, destinationGeocod);
-  }, [locationValue, destinationValue]);
+  const update = useCallback((a, b) => {
+    getGeocordinateLoction(a);
+    getGeocordinateDest(b);
+  });
 
   return {
-    locationValue,
-    destinationValue,
-    setLocationValue,
-    setDestinationValue,
     locationGeocod,
     destinationGeocod,
     handleSubmit,
