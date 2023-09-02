@@ -7,6 +7,7 @@ import Map from "../../components/map";
 import useGetGeocod from "./../../Hooks/useGetGeocod";
 import { Icons } from "../../constants/icons";
 import { context } from "../../components/Context";
+
 export default function Home() {
   const { currentUser } = useContext(context);
   const {
@@ -18,7 +19,6 @@ export default function Home() {
     destinationGeocod,
     handleSubmit,
   } = useGetGeocod();
-  // console.log(currentUser?.photoURL);
   return (
     <main className="h-screen relative">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
@@ -29,7 +29,7 @@ export default function Home() {
           className="rounded-full w-10 h-10"
         />
       </nav>
-      <Map location={locationGeocod} destination={destinationGeocod} />
+      <Map />
       <div className="bg-black rounded-t-3xl h-[55%] flex justify-center  items-center">
         <form
           action=""
