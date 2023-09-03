@@ -4,14 +4,14 @@ import { useLocation } from "react-router-dom";
 import * as tt from "@tomtom-international/web-sdk-maps";
 import Button from "./../../components/Button/index";
 import Map from "../../components/map";
-import useGetGeocod from "./../../Hooks/useGetGeocod";
+// import useGetGeocod from "./../../Hooks/useGetGeocod";
 import { Icons } from "../../constants/icons";
 import { context } from "../../components/Context";
 
 export default function Home() {
-  const { currentUser } = useContext(context);
-  const { locationGeocod, destinationGeocod, handleSubmit } = useGetGeocod();
-  console.log(locationGeocod, destinationGeocod);
+  const { currentUser, handleSubmit } = useContext(context);
+  // const { locationGeocod, destinationGeocod, handleSubmit } = useGetGeocod();
+  // console.log(locationGeocod, destinationGeocod);
   return (
     <main className="h-screen relative">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
