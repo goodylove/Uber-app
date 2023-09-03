@@ -1,13 +1,7 @@
 // import { useCallback, useEffect, useState } from "react";
-// import { toast } from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
-// import { CLIENT_ROUTHS } from "./../constants/routes";
 
 // function useGetGeocod() {
-//   const navigate = useNavigate();
-//   const [locationGeocod, setLocationGeocode] = useState(null);
-//   const [destinationGeocod, setDestinationGeocod] = useState(null);
-
+//   const [pick,setPick]= useState()
 //   const getGeocordinateLoction = async (value) => {
 //     try {
 //       const res = await fetch(
@@ -40,30 +34,7 @@
 //     }
 //   };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     let locationValue = e.target[0].value;
-//     let destinationValue = e.target[1].value;
-
-//     if (locationValue === "" && destinationValue === "") {
-//       toast.error("Please  fill out the inputs");
-//     }
-//     update(locationValue, destinationValue);
-//     locationValue = "";
-//     destinationValue = "";
-//     navigate(CLIENT_ROUTHS.chooseride);
-//   };
-//   const update = useCallback((a, b) => {
-//     getGeocordinateLoction(a);
-//     getGeocordinateDest(b);
-//   });
-
-//   return {
-//     locationGeocod,
-//     destinationGeocod,
-//     handleSubmit,
-//   };
+//   return {};
 // }
 
 // export default useGetGeocod;
