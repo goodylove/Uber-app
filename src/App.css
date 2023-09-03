@@ -8,3 +8,11 @@
 #map {
   height: 600px;
 }
+
+marker {
+  width: 22px;
+  height: 22px;
+  background-color: red;
+  border: solid 2px green;
+  border-radius: 9px;
+}

@@ -56,31 +56,32 @@ function ChooseRide() {
       setloading(false);
       func();
     }, 2000);
-    // return () => clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, [pick, poff]);
 
   return (
     <>
-      {loading && "loading"}
-      <main className="h-screen relative">
-        <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
-          <div>{Icons.bar()}</div>
-          <img
-            src={currentUser?.photoURL}
-            alt="user-profile"
-            className="rounded-full w-10 h-10"
-          />
-        </nav>
-        <Map pickup={newPickUp} dropoff={newDrop} />
-        <div className="bg-black rounded-t-3xl h-[55%] flex justify-center  items-center">
-          <Button
-            className="bg-purple text-white py-3 rounded-md my-3"
-            type="submit"
-          >
-            Next
-          </Button>
-        </div>
-      </main>
+      {!loading && (
+        <main className="h-screen relative">
+          <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
+            <div>{Icons.bar()}</div>
+            <img
+              src={currentUser?.photoURL}
+              alt="user-profile"
+              className="rounded-full w-10 h-10"
+            />
+          </nav>
+          <Map pickup={newPickUp} dropoff={newDrop} />
+          <div className="bg-black rounded-t-3xl h-[55%] flex justify-center  items-center">
+            <Button
+              className="bg-purple text-white py-3 rounded-md my-3"
+              type="submit"
+            >
+              Next
+            </Button>
+          </div>
+        </main>
+      )}
     </>
   );
 }
