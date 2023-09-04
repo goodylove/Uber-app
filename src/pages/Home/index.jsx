@@ -16,7 +16,7 @@ export default function Home() {
   const [dropOff, setDropOff] = useState("");
 
   return (
-    <main className="h-screen relative">
+    <main className="h-screen relative ">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
         <div>{Icons.bar()}</div>
         <img
@@ -26,7 +26,7 @@ export default function Home() {
         />
       </nav>
       <Map />
-      <div className="bg-black rounded-t-3xl h-[55%] flex justify-center  items-center">
+      <div className="bg-black rounded-t-3xl h-[50%] flex justify-center  items-center ">
         <div action="" className="flex flex-col p-4 h-full mt-6 w-full">
           <p className="m-3 text-white text-center text-2xl">
             Where are you going?
@@ -47,17 +47,19 @@ export default function Home() {
             value={dropOff}
             onChange={(e) => setDropOff(e.target.value)}
           />
-          <Link
-            to={pickUp === "" && dropOff === "" ? "" : CLIENT_ROUTHS.chooseride}
-            state={{ pickup: pickUp, dropoff: dropOff }}
+          <Button
+            className="bg-purple text-white py-3 rounded-md my-3"
+            type="submit"
           >
-            <Button
-              className="bg-purple text-white py-3 rounded-md my-3"
-              type="submit"
+            <Link
+              to={
+                pickUp === "" && dropOff === "" ? "" : CLIENT_ROUTHS.chooseride
+              }
+              state={{ pickup: pickUp, dropoff: dropOff }}
             >
               Next
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
       {/* <div className=" flex-1"></div> */}
