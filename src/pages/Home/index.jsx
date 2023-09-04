@@ -25,9 +25,8 @@ export default function Home() {
       const data = await res.json();
       if (data) {
         const result = data?.results[0]?.position;
-        const outPut = Object?.values(result);
         console.log(data);
-        setNewPickUp(outPut);
+        setNewPickUp(result);
       }
     } catch (error) {
       console.log(error.message);
@@ -42,8 +41,8 @@ export default function Home() {
       const data = await res.json();
       if (data) {
         const result = data?.results[0]?.position;
-        const outPut = Object?.values(result);
-        setNewDrop(outPut);
+
+        setNewDrop(result);
       }
     } catch (error) {
       console.log(error.message);
@@ -53,7 +52,7 @@ export default function Home() {
   const handleClick = async (e) => {
     e.preventDefault();
     await getGeocordinateLoction(pickUp);
-    await getGeocordinateLoction(dropOff);
+    await getGeocordinateDest(dropOff);
   };
   console.log(newPickUp);
   // useEffect(() => {

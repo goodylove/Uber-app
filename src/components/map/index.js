@@ -29,9 +29,21 @@ function Map({ pickup, dropoff }) {
         trafficFlow: true,
         trafficIncidents: true,
       },
-      zoom: 14,
+      // style:
+      //   "https://api.tomtom.com/style/1/style/20.4.5-*/?map=basic_night&poi=poi_main",
+      zoom: 15,
     });
     // setMap(map);
+    const locations = [
+      {
+        lat: "",
+        lon: "",
+      },
+      {
+        lat: "",
+        lon: "",
+      },
+    ];
     if (pickup) {
       let [lat, lon] = pickup?.slice();
       // let lat = pickup[1];
@@ -42,13 +54,13 @@ function Map({ pickup, dropoff }) {
     }
     if (dropoff) {
       let [lat, lon] = pickup?.slice();
-
+      addToMap(map, [lon, lat]);
       setLongitude(lon);
       setLatitude(lat);
-      addToMap(map, [lon, lat]);
+
       console.log(lat, lon);
     }
-
+    // addToMap(map, { lat: latitude, lon: longitude });
     // return () => map.remove();
   }, [pickup, dropoff]);
 
@@ -63,11 +75,19 @@ function Map({ pickup, dropoff }) {
     // });
   };
   return (
-    <div className="relative h-[50%] overflow-hidden w-full items-center justify-center">
-      <div ref={mapEelement} className="h-[600px] w-full p-5 "></div>
+    <div className="relative h-[50%]  flex  w-full items-center justify-center">
+      <div className="w-[99%] flex justify-center items-center">
+        <div ref={mapEelement} className="h-[600px] w-full p-5 " />
+      </div>
     </div>
   );
 }
 
 export default Map;
 // https://api.tomtom.com/search/2/geocode/lagos%20nigeria.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO
+// var marker = new tt.Marker().setLngLat(HQ).addTo(map);
+// var popup = new tt.Popup({
+//   anchor: "top",
+// }).setText("HeadQuarters");
+
+// marker.setPopup(popup).togglePopup();
