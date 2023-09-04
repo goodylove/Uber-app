@@ -5,21 +5,24 @@ import Button from "./../../components/Button/index";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 
 function Map({ pickup, dropoff }) {
-  // const [map, setMap] = useState({});
-  // 3.406448;
-  // 6.465422;
   console.log(pickup);
   const mapEelement = useRef();
-  // let center = [-0.112869, 51.504];
-  // -7.4081 23.10687
-  // 45.42042 - 75.69243;/
+
   const [longitude, setLongitude] = useState(-0.112869);
   const [latitude, setLatitude] = useState(51.504);
-  // console.log(...pickup);
-  // 9.0765° N, 7.3986°
-  // 7.491302;9.072264; abuja
-  // 23.10687 - 7.4081; kanu
-  // 8.53486 11.99997
+  // const [longitude1, setLongitude1] = useState(-0.112869);
+  // const [latitude1, setLatitude1] = useState(51.504);
+  // const cent = [
+  //   {
+  //     lat: +latitude,
+  //     lon: +longitude,
+  //   },
+  //   // {
+  //   //   lat: +latitude1,
+  //   //   lon: +longitude1,
+  //   // },
+  // ];
+  const location = [];
   useEffect(() => {
     const map = tt.map({
       key: "42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO",
@@ -34,42 +37,54 @@ function Map({ pickup, dropoff }) {
       zoom: 15,
     });
     // setMap(map);
-    const locations = [
-      {
-        lat: "",
-        lon: "",
-      },
-      {
-        lat: "",
-        lon: "",
-      },
-    ];
+
+    // if (pickup) {
+    //   let [lat, lon] = pickup?.slice();
+    //   // let lat = pickup[1];
+    //   setLongitude(lon);
+    //   setLatitude(lat);
+    //   console.log(lat, lon);
+    //   addToMap(map, [lon, lat]);
+    // }
+    // if (dropoff) {
+    //   let [lat, lon] = pickup?.slice();
+    //   addToMap(map, [lon, lat]);
+    //   setLongitude(lon);
+    //   setLatitude(lat);
+
+    //   console.log(lat, lon);
+    // }
+
     if (pickup) {
-      let [lat, lon] = pickup?.slice();
-      // let lat = pickup[1];
-      setLongitude(lon);
-      setLatitude(lat);
-      console.log(lat, lon);
-      addToMap(map, [lon, lat]);
+      location.push(pickup, dropoff);
+
+      setLongitude(pickup.lon);
+      setLatitude(pickup.lat);
+      addToMap(map);
     }
     if (dropoff) {
-      let [lat, lon] = pickup?.slice();
-      addToMap(map, [lon, lat]);
-      setLongitude(lon);
-      setLatitude(lat);
-
-      console.log(lat, lon);
+      location.push(dropoff);
+      // let [lat, lon] = dropoff?.slice();
+      // setLongitude1(dropoff.lon);
+      // setLatitude1(dropoff.lat);
+      addToMap(map);
     }
+    addToMap(map);
+
     // addToMap(map, { lat: latitude, lon: longitude });
     // return () => map.remove();
   }, [pickup, dropoff]);
 
-  const addToMap = (map, cordinate) => {
-    new tt.Marker({
-      draggable: true,
-    })
-      .setLngLat(cordinate)
-      .addTo(map);
+  const addToMap = (map) => {
+    location.forEach((point) => {
+      console.log(point);
+      new tt.Marker({
+        draggable: true,
+      })
+        .setLngLat(point)
+        .addTo(map);
+    });
+
     // map.fitBounds([cordinate], {
     //   padding: 30,
     // });
