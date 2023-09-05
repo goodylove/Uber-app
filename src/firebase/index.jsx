@@ -7,12 +7,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCUaRRme4rqamJk5z0AXP-RfeA04S3xbxo",
-  authDomain: "taxi-app-14b5b.firebaseapp.com",
-  projectId: "taxi-app-14b5b",
-  storageBucket: "taxi-app-14b5b.appspot.com",
-  messagingSenderId: "419194249231",
-  appId: "1:419194249231:web:dd9b3258ed971c0be6037a",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKE,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase

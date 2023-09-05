@@ -17,7 +17,7 @@ function Map({ pickup, dropoff }) {
   console.log(location);
   useEffect(() => {
     const map = tt.map({
-      key: "42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO",
+      key: process.env.REACT_APP_TOM_TOM_KEY,
       container: mapEelement.current,
       center: [longitude, latitude],
       stylesVisibility: {
