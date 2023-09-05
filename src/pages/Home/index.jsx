@@ -16,11 +16,13 @@ export default function Home() {
   const [dropOff, setDropOff] = useState("");
   const [newPickUp, setNewPickUp] = useState(null);
   const [newDrop, setNewDrop] = useState(null);
+  const myKey = process.env.REACT_APP_TOM_TOM_KEY;
+  const [error, setError] = useState(false);
 
   const getGeocordinateLoction = async (value) => {
     try {
       const res = await fetch(
-        `https://api.tomtom.com/search/2/geocode/${value}.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO`
+        `https://api.tomtom.com/search/2/geocode/${value}.json?key=${myKey}`
       );
       const data = await res.json();
       if (data) {
@@ -36,11 +38,12 @@ export default function Home() {
   const getGeocordinateDest = async (value) => {
     try {
       const res = await fetch(
-        `https://api.tomtom.com/search/2/geocode/${value}.json?key=42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO`
+        `https://api.tomtom.com/search/2/geocode/${value}.json?key=${myKey}`
       );
       const data = await res.json();
       if (data) {
         const result = data?.results[0]?.position;
+        console.log(data);
 
         setNewDrop(result);
       }
@@ -51,11 +54,17 @@ export default function Home() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    let pickUp = e.target[0].value;
+    let dropOff = e.target[1].value;
 
     await getGeocordinateLoction(pickUp);
     await getGeocordinateDest(dropOff);
-  };
 
+    pickUp = "";
+    dropOff = "";
+    e.target[0].value = "";
+    e.target[1].value = "";
+  };
   return (
     <main className="h-screen relative flex flex-col w-full ">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
@@ -81,16 +90,12 @@ export default function Home() {
             placeholder="Enter location"
             name="location"
             className="my-3 py-3 px-3 rounded-md outline-none"
-            value={pickUp}
-            onChange={(e) => setPickUp(e.target.value)}
           />
           <input
             type="text"
             placeholder="Enter Destination"
             className="my-3 py-3 rounded-md outline-none px-3"
             name="destination"
-            value={dropOff}
-            onChange={(e) => setDropOff(e.target.value)}
           />
           <Button
             className="bg-purple text-white py-3 rounded-md my-3"
