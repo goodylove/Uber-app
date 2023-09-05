@@ -1,97 +1,68 @@
 import * as tt from "@tomtom-international/web-sdk-maps";
+import mapServices from "@tomtom-international/web-sdk-services";
 
 import { useEffect, useRef, useState } from "react";
 import Button from "./../../components/Button/index";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 
 function Map({ pickup, dropoff }) {
-  console.log(pickup);
   const mapEelement = useRef();
 
-  // const [longitude, setLongitude] = useState(-0.112869);
-  // const [latitude, setLatitude] = useState(51.504);
+  const [longitude, setLongitude] = useState(-0.112869);
+  const [latitude, setLatitude] = useState(51.504);
+  const [longitude1, setLongitude1] = useState(-0.112869);
+  const [latitude1, setLatitude1] = useState(51.504);
+  const location = [];
 
-  const [location, setLoction] = useState(
-    {
-      lon: -0.112869,
-      lat: 51.504,
-    },
-    {
-      lat: 6.45114,
-      lon: 3.3884,
-    }
-  );
-
-  // const location = [];
+  console.log(location);
   useEffect(() => {
     const map = tt.map({
       key: "42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO",
       container: mapEelement.current,
-      center: [location[0]],
+      center: [longitude, latitude],
       stylesVisibility: {
         trafficFlow: true,
         trafficIncidents: true,
       },
-      // style:
-      //   "https://api.tomtom.com/style/1/style/20.4.5-*/?map=basic_night&poi=poi_main",
-      zoom: 15,
+
+      zoom: 8,
     });
-    // setMap(map);
+    map.addControl(new tt.FullscreenControl());
 
-    // if (pickup) {
-    //   let [lat, lon] = pickup?.slice();
-    //   // let lat = pickup[1];
-    //   setLongitude(lon);
-    //   setLatitude(lat);
-    //   console.log(lat, lon);
-    //   addToMap(map, [lon, lat]);
-    // }
-    // if (dropoff) {
-    //   let [lat, lon] = pickup?.slice();
-    //   addToMap(map, [lon, lat]);
-    //   setLongitude(lon);
-    //   setLatitude(lat);
+    map.addControl(new tt.NavigationControl());
 
-    //   console.log(lat, lon);
-    // }
-
-    // if (pickup) {
-    //   location.push(pickup);
-
-    //   setLongitude(lon);
-    //   setLatitude(lat);
-    // }
-    // if (dropoff) {
-    //   location.push(dropoff);
-    //   let [lat, lon] = dropoff?.slice();
-    //   setLongitude(lon);
-    //   setLatitude(lat);
-    // }
-
-    // if (pickup && dropoff) {
-    //   addToMap(map);
-    // }
-    // addToMap(map, { lat: latitude, lon: longitude });
-    // return () => map.remove();
-  }, [pickup, dropoff]);
-
-  const addToMap = (map) => {
-    location.forEach((point) => {
-      new tt.Marker({
-        draggable: true,
-      })
-        .setLngLat(point)
+    if (!pickup && !dropoff) {
+      new tt.Marker({ draggable: true })
+        .setLngLat([longitude, latitude])
         .addTo(map);
-    });
+    } else if (pickup && dropoff) {
+      setLongitude(pickup.lon);
+      setLatitude(pickup.lat);
+      setLongitude1(dropoff.lon);
+      setLatitude1(dropoff.lat);
+      location.push(
+        { lon: pickup.lon, lat: pickup.lat, from: "pickup" },
+        { lon: dropoff.lon, lat: dropoff.lat, from: "dropoff" }
+      );
 
-    // map.fitBounds([cordinate], {
-    //   padding: 30,
-    // });
-  };
+      location.forEach(function (position) {
+        const marker = new tt.Marker({ draggable: true })
+          .setLngLat(position)
+          .addTo(map);
+
+        const popup = new tt.Popup({
+          anchor: "left",
+        }).setText(position.from);
+
+        marker.setPopup(popup).togglePopup();
+      });
+    }
+  }, [pickup, dropoff, longitude, latitude, longitude1, latitude1]);
+
   return (
-    <div className="relative h-[50%]  flex  w-full items-center justify-center">
-      <div className="w-[99%] flex justify-center items-center">
-        <div ref={mapEelement} className="h-[600px] w-full p-5 " />
+    <div className=" flex-1  w-full items-center justify-center">
+      <div className="w-[99%]  h-[400px] flex justify-center items-center">
+        <div ref={mapEelement} className=" w-full p-5  h-full" />
       </div>
     </div>
   );

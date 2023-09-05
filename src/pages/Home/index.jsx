@@ -51,20 +51,13 @@ export default function Home() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
     await getGeocordinateLoction(pickUp);
     await getGeocordinateDest(dropOff);
   };
-  console.log(newPickUp);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setloading(false);
-  //     func();
-  //   }, 2000);
-  //   return () => clearTimeout(timer);
-  // }, [pick]);
 
   return (
-    <main className="h-screen relative ">
+    <main className="h-screen relative flex flex-col w-full ">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
         <div>{Icons.bar()}</div>
         <img
@@ -74,10 +67,10 @@ export default function Home() {
         />
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />
-      <div className="bg-black rounded-t-3xl h-[50%] flex justify-center  items-center ">
+      <div className="bg-black rounded-t-3xl  flex-1  items-center ">
         <form
           action=""
-          className="flex flex-col p-4 h-full mt-6 w-full"
+          className=" flex  flex-col p-4 h-full  w-full justify-center "
           onSubmit={handleClick}
         >
           <p className="m-3 text-white text-center text-2xl">
