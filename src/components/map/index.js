@@ -8,26 +8,26 @@ function Map({ pickup, dropoff }) {
   console.log(pickup);
   const mapEelement = useRef();
 
-  const [longitude, setLongitude] = useState(-0.112869);
-  const [latitude, setLatitude] = useState(51.504);
-  // const [longitude1, setLongitude1] = useState(-0.112869);
-  // const [latitude1, setLatitude1] = useState(51.504);
-  // const cent = [
-  //   {
-  //     lat: +latitude,
-  //     lon: +longitude,
-  //   },
-  //   // {
-  //   //   lat: +latitude1,
-  //   //   lon: +longitude1,
-  //   // },
-  // ];
-  const location = [];
+  // const [longitude, setLongitude] = useState(-0.112869);
+  // const [latitude, setLatitude] = useState(51.504);
+
+  const [location, setLoction] = useState(
+    {
+      lon: -0.112869,
+      lat: 51.504,
+    },
+    {
+      lat: 6.45114,
+      lon: 3.3884,
+    }
+  );
+
+  // const location = [];
   useEffect(() => {
     const map = tt.map({
       key: "42sj3JewKtwZSgwb8lSmGKThXJsp0ZxO",
       container: mapEelement.current,
-      center: [longitude, latitude],
+      center: [location[0]],
       stylesVisibility: {
         trafficFlow: true,
         trafficIncidents: true,
@@ -55,29 +55,28 @@ function Map({ pickup, dropoff }) {
     //   console.log(lat, lon);
     // }
 
-    if (pickup) {
-      location.push(pickup, dropoff);
+    // if (pickup) {
+    //   location.push(pickup);
 
-      setLongitude(pickup.lon);
-      setLatitude(pickup.lat);
-      addToMap(map);
-    }
-    if (dropoff) {
-      location.push(dropoff);
-      // let [lat, lon] = dropoff?.slice();
-      // setLongitude1(dropoff.lon);
-      // setLatitude1(dropoff.lat);
-      addToMap(map);
-    }
-    addToMap(map);
+    //   setLongitude(lon);
+    //   setLatitude(lat);
+    // }
+    // if (dropoff) {
+    //   location.push(dropoff);
+    //   let [lat, lon] = dropoff?.slice();
+    //   setLongitude(lon);
+    //   setLatitude(lat);
+    // }
 
+    // if (pickup && dropoff) {
+    //   addToMap(map);
+    // }
     // addToMap(map, { lat: latitude, lon: longitude });
     // return () => map.remove();
   }, [pickup, dropoff]);
 
   const addToMap = (map) => {
     location.forEach((point) => {
-      console.log(point);
       new tt.Marker({
         draggable: true,
       })
