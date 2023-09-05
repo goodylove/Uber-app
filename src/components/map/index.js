@@ -1,7 +1,7 @@
 import * as tt from "@tomtom-international/web-sdk-maps";
 import mapServices from "@tomtom-international/web-sdk-services";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "./../../components/Button/index";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 
@@ -15,22 +15,22 @@ function Map({ pickup, dropoff }) {
   const location = [];
 
   // get distance function
-  //   const calculateDistance = async () => {
-  //     try {
-  //       const res =
-  //         await fetch(`https://api.tomtom.com/routing/1/calculateRoute/${longitude},${latitude}:${longitude1},${latitude1}/json?routeRepresentation=summaryOnly&instructionsType=text&key=${process.env.REACT_APP_TOM_TOM_KEY}
+  const calculateDistance = async () => {
+    try {
+      const res =
+        await fetch(`https://api.tomtom.com/routing/1/calculateRoute/${longitude},${latitude}:${longitude1},${latitude1}/json?routeRepresentation=summaryOnly&instructionsType=text&key=${process.env.REACT_APP_TOM_TOM_KEY}
 
-  // `);
-  //       const data = await res.json();
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  `);
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   const callbackFun = useMemo(async () => {
-  //     await calculateDistance();
-  //   }, [pickup, dropoff]);
+  const callbackFun = useMemo(async () => {
+    await calculateDistance();
+  }, [pickup, dropoff]);
 
   console.log(location);
   useEffect(() => {
@@ -68,20 +68,24 @@ function Map({ pickup, dropoff }) {
         { lon: pickup.lon, lat: pickup.lat, from: "pickup" },
         { lon: dropoff.lon, lat: dropoff.lat, from: "dropoff" }
       );
-
-      location.forEach(function (position) {
-        const marker = new tt.Marker({ draggable: true })
-          .setLngLat(position)
-          .addTo(map);
-
-        const popup = new tt.Popup({
-          anchor: "left",
-        }).setText(position.from);
-
-        marker.setPopup(popup).togglePopup();
-      });
+      addToMap(map, location);
     }
+    return () => map.remove();
   }, [pickup, dropoff, longitude, latitude, longitude1, latitude1]);
+
+  const addToMap = useCallback((map, location) => {
+    location.forEach(function (position) {
+      const marker = new tt.Marker({ draggable: true })
+        .setLngLat(position)
+        .addTo(map);
+
+      const popup = new tt.Popup({
+        anchor: "left",
+      }).setText(position.from);
+
+      marker.setPopup(popup).togglePopup();
+    });
+  }, []);
 
   return (
     <div className=" flex-1  w-full items-center justify-center">
