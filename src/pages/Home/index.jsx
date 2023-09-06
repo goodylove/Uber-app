@@ -40,7 +40,7 @@ export default function Home() {
       <Map pickup={newPickUp} dropoff={newDrop} />
 
       {reverse && (
-        <div className="bg-black rounded-t-xl  flex-1  items-center h-full ">
+        <div className="bg-black rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
           <form
             action=""
             className=" flex  flex-col p-4 h-full  w-full justify-center "

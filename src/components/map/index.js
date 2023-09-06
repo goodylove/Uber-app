@@ -70,7 +70,7 @@ function Map({ pickup, dropoff }) {
 
   return (
     <div className=" flex-1  w-full items-center justify-center">
-      <div className="w-[100%]  h-[300px] flex justify-center items-center">
+      <div className="w-[100%]  h-[500px] flex justify-center items-center">
         <div ref={mapEelement} className=" w-full   h-full" />
       </div>
     </div>

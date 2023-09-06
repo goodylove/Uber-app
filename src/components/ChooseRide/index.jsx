@@ -1,5 +1,6 @@
 import Button from "./../Button/index";
 import { Icons } from "./../../constants/icons";
+import { useState } from "react";
 
 const rides = [
   {
@@ -21,26 +22,35 @@ const rides = [
     id: 3,
   },
 ];
-
 function ChooseRides() {
+  const [selectedItem, setSelectedItem] = useState();
+  const [isSelected, setSelected] = useState(false);
+
+  const getSelectedRide = (id) => {
+    const selected = rides.find((ride) => ride.id === id);
+    setSelectedItem(selected);
+    setSelected(true);
+  };
   return (
-    <div className="bg-slate-50 rounded-t-3xl  flex-1  items-center shadow-3xl  ">
-      <div className=" flex justify-between   items-center  px-3 py-2 border-b-2 bg-white">
+    <div className="bg-white rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
+      <div className=" flex justify-between   items-center  px-3  border-b-2 bg-">
         <span>Choose your ride </span>
         <span>{Icons.fontIcon()} </span>
       </div>
       <div className="flex justify-center  w-full">
-        <ul className="flex w-full flex-col items-center justify-center">
-          {rides.map((ride, id) => {
+        <ul className="flex w-full flex-col items-center justify-center gap-3">
+          {rides.map((ride) => {
             return (
               <li
-                className="flex justify-between  px-3  py-2 items-center text-[13px] w-full cursor-pointer"
-                key={id}
-                t
+                className={`flex justify-between  px-3  py-2 items-center text-[13px] w-full cursor-pointer ${
+                  selectedItem.id === ride.id ? "bg-purple text-white" : ""
+                }`}
+                key={ride.id}
+                onClick={() => getSelectedRide(ride.id)}
               >
                 <div className="flex-col flex">
                   <p className="font-bold text-[14px] ">{ride.name}</p>
-                  <p className="pl-2">{`${ride.seater}person`}</p>
+                  <p className="pl-2">{`${ride.seater} person`}</p>
                 </div>
                 <div>${ride.amount}</div>
               </li>
@@ -67,12 +77,17 @@ function ChooseRides() {
             </span>
           </Button>
         </div>
-        <div className="flex justify-center w-full">
-          <Button className="bg-black text-white justify-center gap-10 flex rounded-full items-center  w-[81%] mt-5">
-            <span className="text-[14px]">Book this car $900</span>
-            <span>{Icons.BackIcon()}</span>
-          </Button>
-        </div>
+        {isSelected && (
+          <div className="flex justify-center w-full">
+            <Button className="bg-black text-white justify-between px-3 flex rounded-full items-center  w-[81%] mt-5">
+              <span className="text-[14px]">{`Book this car  `}</span>
+              <span className="flex items-center justify-center mt-1">
+                ${selectedItem.amount}
+                {Icons.BackIcon()}
+              </span>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

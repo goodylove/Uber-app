@@ -75,8 +75,8 @@ const PromoCode = () => (
 
 const BackIcon = () => (
   <svg
-    width="64"
-    height="64"
+    width="54"
+    height="54"
     viewBox="0 0 64 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -385,7 +385,7 @@ const fontIcon = () => {
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
