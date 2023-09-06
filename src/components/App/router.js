@@ -8,6 +8,7 @@ import PageWrapper from "../PageWrapper";
 import SignIn from "./../../pages/auth/Signin/index";
 import SignUp from "./../../pages/auth/Signup/index";
 // import ChooseRide from "../../pages/ChooseRide";
+import PromoPage from "./../../pages/PromoPage/index";
 
 export const ROUTER = createBrowserRouter([
   {
@@ -21,14 +22,14 @@ export const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
-      // {
-      //   path: CLIENT_ROUTHS.chooseride,
-      //   element: (
-      //     <PageWrapper>
-      //       <ChooseRide />
-      //     </PageWrapper>
-      //   ),
-      // },
+      {
+        path: CLIENT_ROUTHS.promopage,
+        element: (
+          <PageWrapper>
+            <PromoPage />
+          </PageWrapper>
+        ),
+      },
     ],
   },
   {

@@ -5,5 +5,6 @@ export const CLIENT_ROUTHS = {
   signin: "/auth/siginin",
   signup: "/auth/signup",
   welcome: "/auth/welome",
+  promopage: "/promopage",
   error: "/*",
 };
