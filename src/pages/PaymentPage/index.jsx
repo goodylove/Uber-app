@@ -6,21 +6,28 @@ const paymentDetails = [
     title: "BePay",
     balance: "$8,00",
     discount: "Get $1 discount",
-    icons: `${Icons.CreditCardIcon()}`,
+    icons: Icons.beIcon(),
     id: "1",
   },
   {
-    title: "BePay",
+    title: "Cash",
     balance: "$8,00",
     discount: "Get $1 discount",
-    icons: `${Icons.CreditCardIcon()}`,
+    icons: Icons.cashIcon(),
     id: "1",
   },
   {
-    title: "BePay",
+    title: "Credit Card",
     balance: "$8,00",
     discount: "Get $1 discount",
-    icons: `${Icons.CreditCardIcon()}`,
+    icons: Icons.CreditCardIcon(),
+    id: "1",
+  },
+  {
+    title: "Paypal",
+    balance: "$8,00",
+    discount: "Get $1 discount",
+    icons: Icons.PayPal(),
     id: "1",
   },
 ];
@@ -41,17 +48,21 @@ function PaymentPage() {
         <div className="flex justify-center  w-full">
           <ul className="flex w-full flex-col items-center justify-center gap-3 mt-4">
             {paymentDetails.map((item) => (
-              <li className="border-b-2 w-full justify-center flex flex-col px-5">
-                <div className="my-3">
-                  <p className="font-bold">{item.title}</p>
-                  <span className="text-[13px]">{item.text}</span>
-                </div>
-                <div className=" flex gap-5 py-1">
-                  <span className="flex items-center gap-2 text-[13px]">
-                    {Icons.Time()}
+              <li className="border-b-2 w-full gap-40  items-center flex   px-5">
+                <div className=" flex gap-5 py-1 items-center">
+                  <span className="bg-purple w-8 h-8 rounded-full flex items-center justify-center">
+                    {item.icons}
                   </span>
-                  {item.icons()}
+                  <div className="my-3">
+                    <p className="font-bold">{item.title}</p>
+                    <span className="text-[13px]">
+                      {" "}
+                      Balance :{item.balance}
+                    </span>
+                  </div>
                 </div>
+
+                <div>{Icons.payIcon()}</div>
               </li>
             ))}
           </ul>
