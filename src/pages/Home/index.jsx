@@ -71,6 +71,7 @@ export default function Home() {
           </form>
         </div>
       )}
+
       {!reverse && <ChooseRides />}
     </main>
   );
