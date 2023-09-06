@@ -14,24 +14,6 @@ function Map({ pickup, dropoff }) {
   const [latitude1, setLatitude1] = useState(6.45114);
   const location = [];
 
-  // get distance function
-  const calculateDistance = async () => {
-    try {
-      const res =
-        await fetch(`https://api.tomtom.com/routing/1/calculateRoute/${longitude},${latitude}:${longitude1},${latitude1}/json?routeRepresentation=summaryOnly&instructionsType=text&key=${process.env.REACT_APP_TOM_TOM_KEY}
-
-  `);
-      const data = await res.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const callbackFun = useMemo(async () => {
-    await calculateDistance();
-  }, [pickup, dropoff]);
-
   console.log(location);
   useEffect(() => {
     const map = tt.map({

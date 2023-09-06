@@ -9,62 +9,13 @@ import { Icons } from "../../constants/icons";
 
 import { context } from "../../components/Context";
 import { CLIENT_ROUTHS } from "../../constants/routes";
+import { toast } from "react-hot-toast";
+import Loader from "./../../components/Loader/index";
 
 export default function Home() {
   const { currentUser } = useContext(context);
-  const [pickUp, setPickUp] = useState("");
-  const [dropOff, setDropOff] = useState("");
-  const [newPickUp, setNewPickUp] = useState(null);
-  const [newDrop, setNewDrop] = useState(null);
-  const myKey = process.env.REACT_APP_TOM_TOM_KEY;
-  const [error, setError] = useState(false);
+  const { handleClick, newDrop, newPickUp, loader } = useGetGeocod();
 
-  const getGeocordinateLoction = async (value) => {
-    try {
-      const res = await fetch(
-        `https://api.tomtom.com/search/2/geocode/${value}.json?key=${myKey}`
-      );
-      const data = await res.json();
-      if (data) {
-        const result = data?.results[0]?.position;
-        console.log(data);
-        setNewPickUp(result);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const getGeocordinateDest = async (value) => {
-    try {
-      const res = await fetch(
-        `https://api.tomtom.com/search/2/geocode/${value}.json?key=${myKey}`
-      );
-      const data = await res.json();
-      if (data) {
-        const result = data?.results[0]?.position;
-        console.log(data);
-
-        setNewDrop(result);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const handleClick = async (e) => {
-    e.preventDefault();
-    let pickUp = e.target[0].value;
-    let dropOff = e.target[1].value;
-
-    await getGeocordinateLoction(pickUp);
-    await getGeocordinateDest(dropOff);
-
-    pickUp = "";
-    dropOff = "";
-    e.target[0].value = "";
-    e.target[1].value = "";
-  };
   return (
     <main className="h-screen relative flex flex-col w-full ">
       <nav className=" flex w-full p-3 justify-between absolute  z-50 top-0">
@@ -76,7 +27,7 @@ export default function Home() {
         />
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />
-      <div className="bg-black rounded-t-3xl  flex-1  items-center ">
+      <div className="bg-black rounded-t-xl  flex-1  items-center ">
         <form
           action=""
           className=" flex  flex-col p-4 h-full  w-full justify-center "
@@ -101,8 +52,9 @@ export default function Home() {
             className="bg-purple text-white py-3 rounded-md my-3"
             type="submit"
           >
-            next
+            {loader ? <Loader /> : "Next"}
           </Button>
+          {/* <Loader /> */}
         </form>
       </div>
       {/* <div className=" flex-1"></div> */}
