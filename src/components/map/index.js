@@ -14,7 +14,6 @@ function Map({ pickup, dropoff }) {
   const [latitude1, setLatitude1] = useState(6.45114);
   const location = [];
 
-  console.log(location);
   useEffect(() => {
     const map = tt.map({
       key: process.env.REACT_APP_TOM_TOM_KEY,
@@ -71,8 +70,8 @@ function Map({ pickup, dropoff }) {
 
   return (
     <div className=" flex-1  w-full items-center justify-center">
-      <div className="w-[99%]  h-[400px] flex justify-center items-center">
-        <div ref={mapEelement} className=" w-full p-5  h-full" />
+      <div className="w-[100%]  h-[300px] flex justify-center items-center">
+        <div ref={mapEelement} className=" w-full   h-full" />
       </div>
     </div>
   );

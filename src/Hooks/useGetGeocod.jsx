@@ -65,7 +65,7 @@ function useGetGeocod() {
     let pickUp = e.target[0].value;
     let dropOff = e.target[1].value;
 
-    if (!e.target[0].value && !e.target[1].value) {
+    if (e.target[0].value === "" && e.target[1].value === "") {
       toast.error("enter location");
       return;
     }
@@ -77,12 +77,13 @@ function useGetGeocod() {
       // setTimeout(() => {
       //   calculateDistance(newPickUp.lon, newPickUp.lat, newDrop.lon, newDrop.lat);
       // }, 2000);
+      setLoader(true);
 
       e.target[0].value = "";
       e.target[1].value = "";
-      setLoader(true);
     } catch (error) {
       console.log("Erorr", error);
+      setLoader(false);
     }
   };
 
