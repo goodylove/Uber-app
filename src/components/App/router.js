@@ -9,6 +9,7 @@ import SignIn from "./../../pages/auth/Signin/index";
 import SignUp from "./../../pages/auth/Signup/index";
 // import ChooseRide from "../../pages/ChooseRide";
 import PromoPage from "./../../pages/PromoPage/index";
+import PaymentPage from "./../../pages/PaymentPage/index";
 
 export const ROUTER = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const ROUTER = createBrowserRouter([
       {
         path: CLIENT_ROUTHS.promopage,
         element: <PromoPage />,
+      },
+      {
+        path: CLIENT_ROUTHS.paymentpage,
+        element: <PaymentPage />,
       },
     ],
   },

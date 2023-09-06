@@ -6,5 +6,6 @@ export const CLIENT_ROUTHS = {
   signup: "/auth/signup",
   welcome: "/auth/welome",
   promopage: "/promopage",
+  paymentpage: "/paymentpage",
   error: "/*",
 };
