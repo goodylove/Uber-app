@@ -1,38 +1,44 @@
+import { useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import { Icons } from "./../../constants/icons";
+import { useEffect } from "react";
 
 const paymentDetails = [
   {
     title: "BePay",
-    balance: "$8,00",
+
     discount: "Get $1 discount",
     icons: Icons.beIcon(),
     id: "1",
   },
   {
     title: "Cash",
-    balance: "$8,00",
+
     discount: "Get $1 discount",
     icons: Icons.cashIcon(),
-    id: "1",
+    id: "2",
   },
   {
     title: "Credit Card",
-    balance: "$8,00",
+
     discount: "Get $1 discount",
     icons: Icons.CreditCardIcon(),
-    id: "1",
+    id: "3",
   },
   {
     title: "Paypal",
-    balance: "$8,00",
+
     discount: "Get $1 discount",
     icons: Icons.PayPal(),
-    id: "1",
+    id: "4",
   },
 ];
 
 function PaymentPage() {
+  const { state } = useLocation();
+
+  paymentDetails.forEach((item) => (item.balance = state?.amount));
+
   return (
     <main className="h-screen bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
@@ -60,7 +66,7 @@ function PaymentPage() {
                     <p className="font-bold">{item.title}</p>
                     <span className="text-[13px]">
                       {" "}
-                      Balance :{item.balance}
+                      Balance: ${item.balance}
                     </span>
                   </div>
                 </div>
@@ -71,6 +77,7 @@ function PaymentPage() {
           </ul>
         </div>
       </div>
+      <Button className="bg-black text-white">view booking Details</Button>
     </main>
   );
 }
