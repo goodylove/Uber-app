@@ -8,19 +8,19 @@ const rides = [
   {
     name: "Toyato Camry",
     seater: "2-3",
-    amount: "8,000",
+    amount: 8000,
     id: 1,
   },
   {
     name: "Lexus R700",
     seater: "2-3",
-    amount: "9,000",
+    amount: 9000,
     id: 2,
   },
   {
     name: "Mercedes W90",
     seater: "2-3",
-    amount: "19,000",
+    amount: 19000,
     id: 3,
   },
 ];

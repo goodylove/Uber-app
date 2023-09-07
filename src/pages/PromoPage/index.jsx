@@ -8,36 +8,36 @@ import { Link, useLocation } from "react-router-dom";
 const promoDetails = [
   {
     title: "$1,00 Discount",
-    text: "You just need to pay $0",
-    discount: 10,
+
+    discount: 0.1,
     id: "1",
     promo: "1234",
   },
   {
     title: "$1,00 Discount",
-    text: "You just need to pay $0",
+
     discount: 10,
     id: "2",
     promo: "2345",
   },
   {
     title: "$1,00 Discount",
-    text: "You just need to pay $0",
-    discount: 10,
+
+    discount: 0.1,
     id: "3",
     promo: "3453",
   },
   {
     title: "$1,00 Discount",
-    text: "You just need to pay $0",
-    discount: 10,
+
+    discount: 0.1,
     id: "4",
     promo: "2123",
   },
   {
     title: "$1,00 Discount",
-    text: "You just need to pay $0",
-    discount: 10,
+
+    discount: 0.1,
     id: "5",
     promo: "2345",
   },
@@ -47,7 +47,7 @@ function PromoPage() {
   const [disable, setDisable] = useState(true);
   const [discount, setDiscount] = useState([]);
   const { state } = useLocation();
-  console.log(state);
+
   const promoNums = ["1234", "2345", "3453", "2123", "2345"];
 
   const renderPromoCode = () => {
@@ -58,7 +58,7 @@ function PromoPage() {
     }
     setDisable(false);
   };
-  const discountRate = (value, discount) => value - value * discount;
+  const discountRate = (value, discount) => value * discount;
 
   const vaildDate = () => {
     const today = new Date();
@@ -67,10 +67,15 @@ function PromoPage() {
 
     const month = new Date().toLocaleString("en-US", { month: "long" });
 
-    promoDetails.forEach(
-      (item) => (item.validProm = `valid until ${month} ${date}, ${year}`),
-      (item.amount = discountRate(+state.amount, item.discount))
-    );
+    const addItem = (item) => {
+      return (
+        (item.validProm = `valid until ${month} ${date}, ${year}`),
+        (item.amount =
+          discountRate(state?.amount, item.discount) - state?.amount)
+      );
+    };
+
+    promoDetails.forEach(addItem);
   };
   vaildDate();
 
@@ -89,7 +94,6 @@ function PromoPage() {
     );
     getDetails.push(getpromoCodeFromPromoDetails);
     setDiscount(getDetails);
-    console.log(discount);
   };
   return (
     <main className="h-screen bg-purple">
@@ -108,13 +112,13 @@ function PromoPage() {
         />
         <Button className="text-white bg-purple p-2 rounded-full">Enter</Button>
       </form>
-      <p className="text-white mt-2 text-[14px]  text-center ">
+      <p className="text-white mt-5 text-[14px]  text-center ">
         don't have promo code ?
-        <span className="underline" onClick={renderPromoCode}>
+        <span className="underline cursor-pointer" onClick={renderPromoCode}>
           Apply
         </span>
       </p>
-      <div className="bg-white rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 h-[70%] ">
+      <div className="bg-white rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 h-[60%] ">
         <div className=" flex justify-between   items-center  px-3  border-b-2 bg-">
           <span className="font-bold">Voucher available </span>
           <span>{Icons.fontIcon()} </span>
@@ -135,7 +139,7 @@ function PromoPage() {
                 >
                   <div className="my-3">
                     <p className="font-bold">{item.title}</p>
-                    <span className="text-[13px]">{`${item.text} ${item.amoun}`}</span>
+                    <span className="text-[13px]">{`you need to just pay  $${item.amount}`}</span>
                   </div>
                   <div className=" flex gap-5 py-1">
                     <span className="flex items-center gap-2 text-[13px]">
@@ -143,7 +147,12 @@ function PromoPage() {
                       {item.validProm}
                     </span>
                     <Button className="bg-black text-white rounded-full p-[5px] text-[13px] w-[25%]">
-                      <Link to={CLIENT_ROUTHS.paymentpage}>use this</Link>
+                      <Link
+                        to={CLIENT_ROUTHS.paymentpage}
+                        state={{ amount: item.amount }}
+                      >
+                        use this
+                      </Link>
                     </Button>
                   </div>
                 </li>
