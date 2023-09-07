@@ -1,6 +1,8 @@
 import Button from "./../Button/index";
 import { Icons } from "./../../constants/icons";
 import { useState } from "react";
+import { CLIENT_ROUTHS } from "./../../constants/routes";
+import { Link } from "react-router-dom";
 
 const rides = [
   {
@@ -78,15 +80,17 @@ function ChooseRides() {
           </Button>
         </div>
         {isSelected && (
-          <div className="flex justify-center w-full">
-            <Button className="bg-black text-white justify-between px-3 flex rounded-full items-center  w-[81%] mt-5">
-              <span className="text-[14px]">{`Book this car  `}</span>
-              <span className="flex items-center justify-center mt-1">
-                ${selectedItem.amount}
-                {Icons.BackIcon()}
-              </span>
-            </Button>
-          </div>
+          <Link to={CLIENT_ROUTHS.promopage} state={selectedItem}>
+            <div className="flex justify-center w-full">
+              <Button className="bg-black text-white justify-between px-3 flex rounded-full items-center  w-[81%] mt-5">
+                <span className="text-[14px]">{`Book this car  `}</span>
+                <span className="flex items-center justify-center mt-1">
+                  ${selectedItem.amount}
+                  {Icons.BackIcon()}
+                </span>
+              </Button>
+            </div>
+          </Link>
         )}
       </div>
     </div>

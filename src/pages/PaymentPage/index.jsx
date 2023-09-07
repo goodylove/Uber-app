@@ -48,7 +48,10 @@ function PaymentPage() {
         <div className="flex justify-center  w-full">
           <ul className="flex w-full flex-col items-center justify-center gap-3 mt-4">
             {paymentDetails.map((item) => (
-              <li className="border-b-2 w-full gap-40  items-center flex   px-5">
+              <li
+                className="border-b-2 w-full gap-40  items-center flex   px-5"
+                key={item.id}
+              >
                 <div className=" flex gap-5 py-1 items-center">
                   <span className="bg-purple w-8 h-8 rounded-full flex items-center justify-center">
                     {item.icons}
