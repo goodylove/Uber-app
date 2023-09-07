@@ -25,11 +25,19 @@ export const ROUTER = createBrowserRouter([
       },
       {
         path: CLIENT_ROUTHS.promopage,
-        element: <PromoPage />,
+        element: (
+          <PageWrapper>
+            <PromoPage />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.paymentpage,
-        element: <PaymentPage />,
+        element: (
+          <PageWrapper>
+            <PaymentPage />
+          </PageWrapper>
+        ),
       },
     ],
   },

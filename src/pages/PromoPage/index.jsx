@@ -12,7 +12,7 @@ const promoDetails = [
     promo: "1234",
   },
   {
-    title: "10% Cashback Guaranteed",
+    title: "$1,00 Discount",
     text: "You just need to pay $8,00",
 
     id: "2",
@@ -55,7 +55,7 @@ function PromoPage() {
     setDisable(false);
   };
 
-  const vaildDate = useMemo(() => {
+  const vaildDate = () => {
     const today = new Date();
     const date = today.getDate();
     const year = today.getFullYear();
@@ -65,11 +65,11 @@ function PromoPage() {
     promoDetails.forEach(
       (item) => (item.validProm = `valid until ${month} ${date}, ${year}`)
     );
-  }, [today]);
+  };
+  vaildDate();
 
   const enterPromoCode = (e) => {
     e.preventDefault();
-    vaildDate();
     const code = e.target[0].value;
     const getCode = promoNums.find((promo) => promo === code);
     e.target[0].value = "";
@@ -134,7 +134,7 @@ function PromoPage() {
                   <div className=" flex gap-5 py-1">
                     <span className="flex items-center gap-2 text-[13px]">
                       {Icons.Time()}
-                      {item.valid}
+                      {item.validProm}
                     </span>
                     <Button className="bg-black text-white rounded-full p-[5px] text-[13px] w-[25%]">
                       use this

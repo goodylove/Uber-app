@@ -39,11 +39,11 @@ function ChooseRides() {
       </div>
       <div className="flex justify-center  w-full">
         <ul className="flex w-full flex-col items-center justify-center gap-3">
-          {rides.map((ride) => {
+          {rides?.map((ride) => {
             return (
               <li
                 className={`flex justify-between  px-3  py-2 items-center text-[13px] w-full cursor-pointer ${
-                  selectedItem.id === ride.id ? "bg-purple text-white" : ""
+                  selectedItem?.id === ride?.id ? "bg-purple text-white" : ""
                 }`}
                 key={ride.id}
                 onClick={() => getSelectedRide(ride.id)}
