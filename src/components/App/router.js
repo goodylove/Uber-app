@@ -11,6 +11,7 @@ import SignUp from "./../../pages/auth/Signup/index";
 import PromoPage from "./../../pages/PromoPage/index";
 import PaymentPage from "./../../pages/PaymentPage/index";
 import CancelBooking from "../../pages/CancelBooking";
+import Trip from "./../../pages/trip/index";
 
 export const ROUTER = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ export const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <CancelBooking />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTHS.trip,
+        element: (
+          <PageWrapper>
+            <Trip />
           </PageWrapper>
         ),
       },

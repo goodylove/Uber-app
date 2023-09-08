@@ -8,5 +8,6 @@ export const CLIENT_ROUTHS = {
   promopage: "/promopage",
   paymentpage: "/paymentpage",
   cancelbooking: "/cancelbooking",
+  trip: "/trip",
   error: "/*",
 };
