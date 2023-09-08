@@ -1,5 +1,5 @@
 import { Icons } from "../../constants/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./../../components/Button/index";
 import { CLIENT_ROUTHS } from "./../../constants/routes";
 import DriverImg from "../../assets/user-3.jpg";
@@ -11,6 +11,7 @@ function Trip() {
   const [rate, setRate] = useState(0);
   const [hoverOnRate, setHoverOnRate] = useState();
   const [currentValue, setCurrentValue] = useState(0);
+  const navigate = useNavigate();
 
   const star = Array(5).fill(0);
 
@@ -93,7 +94,10 @@ function Trip() {
         </div>
 
         <div className="flex justify-center items-center">
-          <Button className="bg-black text-white rounded-full  w-40 p-3 ">
+          <Button
+            className="bg-black text-white rounded-full  w-40 p-3 "
+            onClick={() => navigate(CLIENT_ROUTHS.success)}
+          >
             Submit
           </Button>
         </div>

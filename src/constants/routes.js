@@ -9,5 +9,6 @@ export const CLIENT_ROUTHS = {
   paymentpage: "/paymentpage",
   cancelbooking: "/cancelbooking",
   trip: "/trip",
+  success: "/success",
   error: "/*",
 };
