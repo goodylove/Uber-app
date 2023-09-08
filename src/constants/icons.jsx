@@ -579,7 +579,7 @@ const line = () => {
         stroke-miterlimit="10"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-dasharray="4 4"
+        strokeDasharray="4 4"
       />
     </svg>
   );

@@ -17,8 +17,6 @@ function Trip() {
 
   const handleClick = (value) => setCurrentValue(value);
 
-  const handleMouseEnter = (value) => setHoverOnRate(value);
-  const handleMouseLeave = () => setHoverOnRate();
   return (
     <main className="bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
