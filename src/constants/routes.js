@@ -7,6 +7,6 @@ export const CLIENT_ROUTHS = {
   welcome: "/auth/welome",
   promopage: "/promopage",
   paymentpage: "/paymentpage",
-  bookingdetails: "/bookingdetails",
+  cancelbooking: "/cancelbooking",
   error: "/*",
 };

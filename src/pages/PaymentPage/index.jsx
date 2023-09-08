@@ -6,13 +6,6 @@ import { CLIENT_ROUTHS } from "../../constants/routes";
 
 const paymentDetails = [
   {
-    title: "BePay",
-
-    discount: "Get $1 discount",
-    icons: Icons.beIcon(),
-    id: "1",
-  },
-  {
     title: "Cash",
 
     discount: "Get $1 discount",
@@ -78,7 +71,7 @@ function PaymentPage() {
           </ul>
         </div>
         <div className="flex justify-center items-center mt-4">
-          <Link to={CLIENT_ROUTHS.bookingdetails}>
+          <Link to={CLIENT_ROUTHS.cancelbooking}>
             <Button className="bg-black text-white m-auto p-3 rounded-full">
               View Booking Details
             </Button>

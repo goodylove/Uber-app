@@ -10,7 +10,7 @@ import SignUp from "./../../pages/auth/Signup/index";
 // import ChooseRide from "../../pages/ChooseRide";
 import PromoPage from "./../../pages/PromoPage/index";
 import PaymentPage from "./../../pages/PaymentPage/index";
-import BookingDetails from "./../../pages/BookingDetails/index";
+import CancelBooking from "../../pages/CancelBooking";
 
 export const ROUTER = createBrowserRouter([
   {
@@ -41,10 +41,10 @@ export const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTHS.bookingdetails,
+        path: CLIENT_ROUTHS.cancelbooking,
         element: (
           <PageWrapper>
-            <BookingDetails />
+            <CancelBooking />
           </PageWrapper>
         ),
       },
