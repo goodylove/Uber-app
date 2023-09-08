@@ -4,8 +4,8 @@ function Success() {
   return (
     <main className="bg-purple h-screen flex justify-center flex-col items-center">
       <img src={Car} alt="" />
-      <p>THANK YOU FOR CHOOSING OUR RIDE</p>
-      <span>Enjoy your trip</span>
+      <p className="text-white">THANK YOU FOR CHOOSING OUR RIDE</p>
+      <span className="text-white">Enjoy your trip</span>
     </main>
   );
 }
