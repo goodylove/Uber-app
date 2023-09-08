@@ -1,7 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import { Icons } from "./../../constants/icons";
 import { useEffect } from "react";
+import { CLIENT_ROUTHS } from "../../constants/routes";
 
 const paymentDetails = [
   {
@@ -76,8 +77,14 @@ function PaymentPage() {
             ))}
           </ul>
         </div>
+        <div className="flex justify-center items-center mt-4">
+          <Link to={CLIENT_ROUTHS.bookingdetails}>
+            <Button className="bg-black text-white m-auto p-3 rounded-full">
+              View Booking Details
+            </Button>
+          </Link>
+        </div>
       </div>
-      <Button className="bg-black text-white">view booking Details</Button>
     </main>
   );
 }

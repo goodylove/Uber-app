@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { context } from "./../../components/Context/index";
+import Map from "./../../components/map/index";
+import ChooseRides from "./../../components/ChooseRide/index";
+import { Icons } from "./../../constants/icons";
 
 function BookingDetails() {
   const { currentUser } = useContext(context);
