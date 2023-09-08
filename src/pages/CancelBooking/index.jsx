@@ -6,6 +6,7 @@ import { CLIENT_ROUTHS } from "./../../constants/routes";
 import Button from "./../../components/Button/index";
 import { Link } from "react-router-dom";
 import CarImg from "../../assets/Ellipse 10.png";
+// import { Icons } from "./../../constants/icons";
 
 function CancelBooking() {
   return (
@@ -15,7 +16,7 @@ function CancelBooking() {
         <span className="text-[17px] text-white my-4">Cancel Booking</span>
       </div>
       <div className="flex justify-center ">
-        {/* <span>{Icons.CancelBooking()}</span> */}
+        {/* <span>{Icons.cancelbook()}</span> */}
         <img src={CarImg} alt="" />
       </div>
 

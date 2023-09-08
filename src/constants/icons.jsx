@@ -314,7 +314,7 @@ const Google = () => (
   </svg>
 );
 
-const CancelBooking = () => (
+const cancelbook = () => (
   <svg
     width="48"
     height="48"
@@ -508,7 +508,7 @@ export const Icons = {
   CreditCardIcon,
   PayPal,
   SmsIcon,
-  CancelBooking,
+  cancelbook,
   bar,
   fontIcon,
   cancel,
