@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { Icons } from "./../../constants/icons";
 import { useEffect, useState } from "react";
 import { CLIENT_ROUTHS } from "../../constants/routes";
+import { toast } from "react-hot-toast";
 
 const paymentDetails = [
   {
@@ -31,8 +32,14 @@ const paymentDetails = [
 function PaymentPage() {
   const { state } = useLocation();
   const [select, setSelect] = useState();
+  const navigate = useNavigate();
 
   paymentDetails.forEach((item) => (item.balance = state?.amount));
+
+  const handleNavigate = () => {
+    if (!select) return;
+    navigate(CLIENT_ROUTHS.trip);
+  };
 
   return (
     <main className="h-screen bg-purple">
@@ -76,16 +83,19 @@ function PaymentPage() {
           </ul>
         </div>
         <div className="flex justify-between p-3   items-center mt-4">
-          <Link to={select ? CLIENT_ROUTHS.trip : ""}>
-            <Button className="bg-black text-white m-auto p-3 rounded-xl">
-              Continue
-            </Button>
-          </Link>
-          <Link to={CLIENT_ROUTHS.cancelbooking}>
-            <Button className="bg-black text-white m-auto p-3 rounded-xl">
-              Cancel Booking
-            </Button>
-          </Link>
+          <Button
+            className="bg-black text-white m-auto p-3 rounded-xl"
+            onClick={handleNavigate}
+          >
+            Continue
+          </Button>
+
+          <Button
+            className="bg-black text-white m-auto p-3 rounded-xl"
+            onClick={() => select && navigate(CLIENT_ROUTHS.cancelbooking)}
+          >
+            Cancel Booking
+          </Button>
         </div>
       </div>
     </main>

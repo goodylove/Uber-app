@@ -562,6 +562,28 @@ const rate = () => {
     </svg>
   );
 };
+
+const line = () => {
+  return (
+    <svg
+      width="3"
+      height="26"
+      viewBox="0 0 3 35"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.22803 1.70599V33.296"
+        stroke="#C8C7CC"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="4 4"
+      />
+    </svg>
+  );
+};
 export const Icons = {
   Time,
   pickUpPoint,
@@ -584,4 +606,5 @@ export const Icons = {
   star,
   starBig,
   rate,
+  line,
 };

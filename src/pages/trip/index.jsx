@@ -5,6 +5,7 @@ import { CLIENT_ROUTHS } from "./../../constants/routes";
 import DriverImg from "../../assets/user-3.jpg";
 import { useSignUp } from "../../Hooks/useSignUp";
 import { useState } from "react";
+import usePageWrapper from "./../../Hooks/usePageWrapper";
 
 function Trip() {
   const [rate, setRate] = useState(0);
@@ -39,16 +40,64 @@ function Trip() {
         <p className="text-center mt-2 font-bold">How Is Your Trip ?</p>
         <div className="flex justify-center mt-3">
           {star.map((_, i) => (
-            <span
-              onClick={() => handleClick(i + 1)}
-              onMouseOver={() => handleMouseEnter(i + 1)}
-              onMouseLeave={handleMouseLeave}
-            >
-              {currentValue || hoverOnRate > i ? Icons.starBig() : Icons.rate()}
+            <span key={i} onClick={() => handleClick(i + 1)}>
+              {i + 1 <= currentValue ? Icons.starBig() : Icons.rate()}
             </span>
           ))}
         </div>
 
+        <div className="flex justify-center rounded-xl  my-4">
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="3"
+            placeholder="write your feedback"
+            className="border-2 rounded-xl p-1 outline-none  "
+          ></textarea>
+        </div>
+
+        <div className=" w-full">
+          <h3 className="px-4 my-3 font-bold">Trip Detail</h3>
+          <div className="bg-gray-200 w-full px-4 py-1">
+            <div className="flex gap-3  mt-5">
+              <div className="flex flex-col  justify-center items-center">
+                <span className="border">{Icons.payIconActive()}</span>
+                <span>{Icons.line()}</span>
+                <span>{Icons.Destination()}</span>
+              </div>
+
+              <div className="flex flex-col gap-4  ">
+                <span>pick up</span>
+                <span className="mt-3">drop off</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className=" w-full px-3">
+          <h2 className="px-4 my-3 font-bold">Payment Details</h2>
+          <div className="px-4">
+            <div className="flex justify-between">
+              <span>Trip Expenses</span>
+              <span>$8000</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Trip Discount</span>
+              <span>$7000</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Total</span>
+              <span>$2003</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center items-center">
+          <Button className="bg-black text-white rounded-full  w-40 p-3 ">
+            Submit
+          </Button>
+        </div>
+        {/* 
         <div className="flex justify-between p-3  gap-10  items-center mt-4">
           <Link to={CLIENT_ROUTHS.trip}>
             <Button className="bg-black text-white m-auto p-3 rounded-xl">
@@ -60,7 +109,7 @@ function Trip() {
               Cancel Booking
             </Button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </main>
   );
