@@ -22,7 +22,9 @@ function Trip() {
   return (
     <main className="bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
-        <span>{Icons.cancel()}</span>
+        <span onClick={() => navigate(CLIENT_ROUTHS.home)}>
+          {Icons.cancel()}
+        </span>
         <span className="text-[17px] text-white my-4">Rate Your Trip</span>
       </div>
 

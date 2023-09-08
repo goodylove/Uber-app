@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import { Icons } from "../../constants/icons";
 import { useMemo, useState } from "react";
 import { CLIENT_ROUTHS } from "../../constants/routes";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const promoDetails = [
   {
@@ -47,6 +47,7 @@ function PromoPage() {
   const [disable, setDisable] = useState(true);
   const [discount, setDiscount] = useState([]);
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   const promoNums = ["1234", "2345", "3453", "2123", "2345"];
 
@@ -98,7 +99,9 @@ function PromoPage() {
   return (
     <main className="h-screen bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
-        <span>{Icons.cancel()}</span>
+        <span onClick={() => navigate(CLIENT_ROUTHS.home)}>
+          {Icons.cancel()}
+        </span>
         <span className="text-[17px] text-white">Voucher</span>
       </div>
       <form

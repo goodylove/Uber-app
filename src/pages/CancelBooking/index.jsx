@@ -4,7 +4,7 @@ import Map from "../../components/map/index";
 import { Icons } from "../../constants/icons";
 import { CLIENT_ROUTHS } from "./../../constants/routes";
 import Button from "./../../components/Button/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CarImg from "../../assets/Ellipse 10.png";
 // import { Icons } from "./../../constants/icons";
 
@@ -29,6 +29,7 @@ const reasons = [
 
 function CancelBooking() {
   const [click, setClick] = useState(0);
+  const navigate = useNavigate();
 
   const handleSelect = (id) => {
     setClick(id);
@@ -36,7 +37,9 @@ function CancelBooking() {
   return (
     <main className="h-screen bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
-        <span>{Icons.cancel()}</span>
+        <span onClick={() => navigate(CLIENT_ROUTHS.home)}>
+          {Icons.cancel()}
+        </span>
         <span className="text-[17px] text-white my-4">Cancel Booking</span>
       </div>
       <div className="flex justify-center  relative">
