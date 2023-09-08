@@ -50,7 +50,7 @@ function PaymentPage() {
           <ul className="flex w-full flex-col items-center justify-center gap-3 mt-4">
             {paymentDetails.map((item) => (
               <li
-                className="border-b-2 w-full gap-40  items-center flex   px-5"
+                className="border-b-2 w-full  justify-between  items-center flex   px-5"
                 key={item.id}
               >
                 <div className=" flex gap-5 py-1 items-center">
@@ -73,8 +73,8 @@ function PaymentPage() {
             ))}
           </ul>
         </div>
-        <div className="flex justify-between p-3  gap-10  items-center mt-4">
-          <Link to={CLIENT_ROUTHS.home}>
+        <div className="flex justify-between p-3   items-center mt-4">
+          <Link to={select ? CLIENT_ROUTHS.trip : ""}>
             <Button className="bg-black text-white m-auto p-3 rounded-xl">
               Continue
             </Button>
