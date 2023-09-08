@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import { Icons } from "./../../constants/icons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CLIENT_ROUTHS } from "../../constants/routes";
 
 const paymentDetails = [
@@ -30,6 +30,7 @@ const paymentDetails = [
 
 function PaymentPage() {
   const { state } = useLocation();
+  const [select, setSelect] = useState();
 
   paymentDetails.forEach((item) => (item.balance = state?.amount));
 
@@ -41,11 +42,11 @@ function PaymentPage() {
       </div>
 
       <div className="bg-white rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 h-[80%] mt-3 ">
-        <div className=" flex justify-between   items-center  px-3   border-b-2 bg-">
+        <div className=" flex justify-between   items-center  px-3 py-3   border-b-2 bg-">
           <span className="font-bold">Choose Payment Method </span>
           <span>{Icons.fontIcon()} </span>
         </div>
-        <div className="flex justify-center  w-full">
+        <div className="flex justify-center  w-full my-6">
           <ul className="flex w-full flex-col items-center justify-center gap-3 mt-4">
             {paymentDetails.map((item) => (
               <li
@@ -65,15 +66,22 @@ function PaymentPage() {
                   </div>
                 </div>
 
-                <div>{Icons.payIcon()}</div>
+                <div onClick={() => setSelect(item.id)}>
+                  {select === item.id ? Icons.payIconActive() : Icons.payIcon()}
+                </div>
               </li>
             ))}
           </ul>
         </div>
-        <div className="flex justify-center items-center mt-4">
+        <div className="flex justify-between p-3  gap-10  items-center mt-4">
+          <Link to={CLIENT_ROUTHS.home}>
+            <Button className="bg-black text-white m-auto p-3 rounded-xl">
+              Continue
+            </Button>
+          </Link>
           <Link to={CLIENT_ROUTHS.cancelbooking}>
-            <Button className="bg-black text-white m-auto p-3 rounded-full">
-              View Booking Details
+            <Button className="bg-black text-white m-auto p-3 rounded-xl">
+              Cancel Booking
             </Button>
           </Link>
         </div>
