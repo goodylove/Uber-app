@@ -37,7 +37,9 @@ function PaymentPage() {
   return (
     <main className="h-screen bg-purple">
       <div className="flex   gap-20 items-center p-6 ">
-        <span>{Icons.cancel()}</span>
+        <Link to={CLIENT_ROUTHS.home}>
+          <span>{Icons.cancel()}</span>
+        </Link>
         <span className="text-[17px] text-white my-4">Payment Method</span>
       </div>
 
