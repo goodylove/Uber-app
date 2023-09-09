@@ -2,7 +2,7 @@ import Button from "./../Button/index";
 import { Icons } from "./../../constants/icons";
 import { useState } from "react";
 import { CLIENT_ROUTHS } from "./../../constants/routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const rides = [
   {
@@ -27,6 +27,7 @@ const rides = [
 function ChooseRides() {
   const [selectedItem, setSelectedItem] = useState();
   const [isSelected, setSelected] = useState(false);
+  const navigate = useNavigate();
 
   const getSelectedRide = (id) => {
     const selected = rides.find((ride) => ride.id === id);
@@ -37,7 +38,7 @@ function ChooseRides() {
     <div className="bg-white rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
       <div className=" flex justify-between   items-center  px-3  border-b-2 bg-">
         <span>Choose your ride </span>
-        <span>{Icons.fontIcon()} </span>
+        <span className=" cursor-pointer">{Icons.fontIcon()} </span>
       </div>
       <div className="flex justify-center  w-full">
         <ul className="flex w-full flex-col items-center justify-center gap-3">

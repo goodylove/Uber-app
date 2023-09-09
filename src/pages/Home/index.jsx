@@ -10,6 +10,7 @@ import { Icons } from "../../constants/icons";
 import { context } from "../../components/Context";
 import { toast } from "react-hot-toast";
 import Loader from "./../../components/Loader/index";
+import "../../App.css";
 import ChooseRides from "./../../components/ChooseRide/index";
 
 export default function Home() {
@@ -29,12 +30,12 @@ export default function Home() {
 
   return (
     <main className="h-screen  relative flex flex-col w-full ">
-      <nav className=" flex w-full px-3 justify-between absolute  z-50 top-0">
+      <nav className=" flex w-full px-9 justify-between absolute  z-50 top-0">
         <div>{Icons.bar()}</div>
         <img
           src={currentUser?.photoURL}
           alt="user-profile"
-          className="rounded-full w-10 h-10"
+          className="rounded-full w-10 h-10 "
         />
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />

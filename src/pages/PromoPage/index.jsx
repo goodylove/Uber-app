@@ -62,15 +62,31 @@ function PromoPage() {
   const discountRate = (value, discount) => value * discount;
 
   const vaildDate = () => {
-    const today = new Date();
+    const today = new Date(2024, 10, 12, 12);
     const date = today.getDate();
     const year = today.getFullYear();
+    const month = today.getMonth();
 
-    const month = new Date().toLocaleString("en-US", { month: "long" });
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "may",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    // const month = new Date().toLocaleString("en-US", { month: "long" });
 
     const addItem = (item) => {
       return (
-        (item.validProm = `valid until ${month} ${date}, ${year}`),
+        (item.validProm = `valid until ${months[month]} ${date}, ${year}`),
         (item.amount =
           discountRate(state?.amount, item.discount) - state?.amount)
       );
@@ -105,7 +121,7 @@ function PromoPage() {
         <span className="text-[17px] text-white">Voucher</span>
       </div>
       <form
-        className="flex  items-center justify-center mt-3  m-auto gap-3  rounded-full outline-none border-none bg-white w-[80%]"
+        className="flex  items-center justify-center mt-3  m-auto gap-7  rounded-full outline-none border-none bg-white  md:w-[30%] w-[80%]"
         onSubmit={enterPromoCode}
       >
         <input
@@ -113,7 +129,9 @@ function PromoPage() {
           placeholder="Have a promo code? enter it here"
           className="p-3 bg-none rounded-full text-[15px] outline-none border-none"
         />
-        <Button className="text-white bg-purple p-2 rounded-full">Enter</Button>
+        <Button className="text-white bg-purple px-3 py-2 rounded-full ">
+          Enter
+        </Button>
       </form>
       <p className="text-white mt-5 text-[14px]  text-center ">
         don't have promo code ?

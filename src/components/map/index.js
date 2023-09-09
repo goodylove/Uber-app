@@ -39,17 +39,37 @@ function Map({ pickup, dropoff }) {
       setLatitude(pickup.lat);
       setLongitude1(dropoff.lon);
       setLatitude1(dropoff.lat);
-      // callbackFun();
-
-      // setTimeout(() => {
-      //   calculateDistance(pickup.lon, pickup.lat, dropoff.lon, dropoff.lat);
-      // }, 2000);
 
       location.push(
         { lon: pickup.lon, lat: pickup.lat, from: "pickup" },
         { lon: dropoff.lon, lat: dropoff.lat, from: "dropoff" }
       );
       addToMap(map, location);
+      const service = mapServices.services
+        .calculateRoute({
+          key: process.env.REACT_APP_TOM_TOM_KEY,
+          locations: location,
+        })
+        .then(function (response) {
+          let geojson = response.toGeoJson();
+          map.addLayer({
+            id: "route",
+            type: "line",
+            source: {
+              type: "geojson",
+              data: geojson,
+            },
+            paint: {
+              "line-color": "purple",
+              "line-width": 8,
+            },
+          });
+          // const bounds = new mapServices.LngLatBounds();
+          // geojson.features[0].geometry.coordinates.forEach(function (point) {
+          //   bounds.extend(mapServices.LngLat.convert(point));
+          // });
+          // map.fitBounds(bounds, { padding: 20 });
+        });
     }
     return () => map.remove();
   }, [pickup, dropoff, longitude, latitude, longitude1, latitude1]);
@@ -60,11 +80,11 @@ function Map({ pickup, dropoff }) {
         .setLngLat(position)
         .addTo(map);
 
-      const popup = new tt.Popup({
-        anchor: "left",
-      }).setText(position.from);
+      // const popup = new tt.Popup({
+      //   anchor: "left",
+      // }).setText(position.from);
 
-      marker.setPopup(popup).togglePopup();
+      // marker.setPopup(popup).togglePopup();
     });
   }, []);
 
