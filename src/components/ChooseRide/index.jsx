@@ -45,7 +45,7 @@ function ChooseRides() {
           {rides?.map((ride) => {
             return (
               <li
-                className={`flex justify-between  px-3  py-2 items-center text-[13px] w-full cursor-pointer  hover:bg-purple hover:text-white ${
+                className={`flex justify-between  px-3  py-2 items-center text-[13px] w-full cursor-pointer  hover:bg-gray-300  hover:text-white ${
                   selectedItem?.id === ride?.id ? "bg-purple text-white" : ""
                 }`}
                 key={ride.id}

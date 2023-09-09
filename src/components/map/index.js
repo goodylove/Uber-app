@@ -2,7 +2,7 @@ import * as tt from "@tomtom-international/web-sdk-maps";
 import mapServices from "@tomtom-international/web-sdk-services";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Button from "./../../components/Button/index";
+import TimeImg from "../../assets/time.png";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 
 function Map({ pickup, dropoff }) {
@@ -16,7 +16,7 @@ function Map({ pickup, dropoff }) {
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [secconds, setSecconds] = useState();
-  const [storeEstimateTime, seStoreEstimateTime] = useState();
+  const [storeEstimateTime, seStoreEstimateTime] = useState(false);
 
   useEffect(() => {
     const map = tt.map({
@@ -49,7 +49,6 @@ function Map({ pickup, dropoff }) {
         { lon: dropoff.lon, lat: dropoff.lat, from: "To" }
       );
       addToMap(map, location);
-      getTravelDistance(storeEstimateTime ?? "");
       try {
         const service = mapServices.services
           .calculateRoute({
@@ -59,9 +58,13 @@ function Map({ pickup, dropoff }) {
           .then(function (response) {
             let geojson = response.toGeoJson();
 
-            seStoreEstimateTime(
+            // seStoreEstimateTime(
+            //   geojson.features[0].properties.summary.travelTimeInSeconds
+            // );
+            getTravelDistance(
               geojson.features[0].properties.summary.travelTimeInSeconds
             );
+
             map.addLayer({
               id: "route",
               type: "line",
@@ -70,7 +73,7 @@ function Map({ pickup, dropoff }) {
                 data: geojson,
               },
               paint: {
-                "line-color": "purple",
+                "line-color": "red",
                 "line-width": 4,
               },
             });
@@ -102,30 +105,28 @@ function Map({ pickup, dropoff }) {
     [pickup, dropoff]
   );
 
-  const getTravelDistance = useCallback(
-    function (milliseconds) {
-      const hour = Math.floor(milliseconds / 3600);
-      const remaingSecondsAfterHours = milliseconds % 3600;
-      const min = Math.floor(remaingSecondsAfterHours / 60);
-      const seconds = remaingSecondsAfterHours % 60;
+  const getTravelDistance = function (milliseconds) {
+    const hour = Math.floor(milliseconds / 3600);
+    const remaingSecondsAfterHours = milliseconds % 3600;
+    const min = Math.floor(remaingSecondsAfterHours / 60);
+    const seconds = remaingSecondsAfterHours % 60;
+    if (milliseconds) seStoreEstimateTime(true);
 
-      setHours(hour);
-      setMinutes(min);
-      setSecconds(seconds);
-      console.log(milliseconds);
-    },
-    [pickup, dropoff]
-  );
+    setHours(hour);
+    setMinutes(min);
+    setSecconds(seconds);
+  };
 
   return (
     <div className=" flex-1  w-full items-center justify-center">
       <div className="w-[100%]  h-[500px] flex justify-center items-center relative">
         <div ref={mapEelement} className=" w-full   h-full" />
         {storeEstimateTime && (
-          <div className="bg-white rounded-md text-[13px] p-8  absolute left-4 top-[50px]">
-            <img src="" />
+          <div className="bg-white rounded-md text-[13px]  font-semibold p-5  absolute left-4 top-[50px] gap-3 flex items-center">
+            <img src={TimeImg} className="w-10 h-10" />
             <p>
-              Your journey will take {hours < 1 ? "" : `${hours}hr`} {minutes}
+              Your journey will take <br />
+              {hours < 1 ? "" : `${hours}hr`} {minutes}
               min and {secconds}sec
             </p>
           </div>

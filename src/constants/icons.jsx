@@ -575,7 +575,7 @@ const line = () => {
       <path
         d="M1.22803 1.70599V33.296"
         stroke="#C8C7CC"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-miterlimit="10"
         stroke-linecap="round"
         stroke-linejoin="round"
