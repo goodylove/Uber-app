@@ -5,8 +5,6 @@ import toast from "react-hot-toast";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { CLIENT_ROUTHS } from "../constants/routes";
-import { useNavigate } from "react-router-dom";
 
 export const useSignUp = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +12,6 @@ export const useSignUp = () => {
     displayName: "",
     password: "",
   });
-  const navigate = useNavigate();
 
   const [userImage, setUserImage] = useState();
 
@@ -26,23 +23,21 @@ export const useSignUp = () => {
     });
   };
   // const handleChangeFile = (e) => {
-  //   const files = e.target.files?.[0];
-  //   if (!files) return;
   //   setUserImage(files);
+  //   console.log(files);
   // };
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    console.log(userImage);
     const files = event.target.files?.[0];
-    if (!files) return;
-    setUserImage(files);
+    // if (!files) return;
+    console.log(files, "ok");
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      // console.log(res);
+      console.log(res);
 
       const storageRef = ref(storage, `images/${userImage}`);
 
@@ -72,6 +67,7 @@ export const useSignUp = () => {
         },
         (error) => {
           // Handle unsuccessful uploads
+          console.log(error);
         },
         () => {
           // Handle successful uploads on complete
@@ -91,8 +87,8 @@ export const useSignUp = () => {
         password: "",
       });
       toast.success("successful");
-      navigate(CLIENT_ROUTHS.signin);
     } catch (error) {
+      console.log("Error: " + error);
       toast.error("Error");
     }
   };
