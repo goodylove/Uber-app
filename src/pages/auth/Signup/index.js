@@ -7,8 +7,7 @@ import { CLIENT_ROUTHS } from "../../../constants/routes";
 import Button from "./../../../components/Button/index";
 
 export default function SignUp() {
-  const { handleChange, handleChangeFile, handleSubmitForm, formData } =
-    useSignUp();
+  const { handleChange, handleSubmitForm, formData } = useSignUp();
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
       <div>{Icons.Logo()}</div>
@@ -73,7 +72,6 @@ export default function SignUp() {
               className="  "
               style={{ display: "none" }}
               accept="image/*"
-              onChange={handleChangeFile}
             />
             <span className=" font-poppins text-[10px] text-white">
               Add An Avatar

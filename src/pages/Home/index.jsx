@@ -15,8 +15,10 @@ import ChooseRides from "./../../components/ChooseRide/index";
 
 export default function Home() {
   const { currentUser } = useContext(context);
+  console.log(currentUser);
 
-  const { handleClick, newDrop, newPickUp, loader } = useGetGeocod();
+  const { handleClick, newDrop, newPickUp, loader, handleSignOut } =
+    useGetGeocod();
 
   const [reverse, setReverse] = useState(true);
 
@@ -36,6 +38,7 @@ export default function Home() {
           src={currentUser?.photoURL}
           alt="user-profile"
           className="rounded-full w-10 h-10 "
+          onClick={handleSignOut}
         />
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
 
 import { toast } from "react-hot-toast";
 
+import { auth } from "../firebase";
 function useGetGeocod() {
   const [newPickUp, setNewPickUp] = useState(null);
   const [newDrop, setNewDrop] = useState(null);
@@ -23,6 +25,11 @@ function useGetGeocod() {
     } catch (error) {
       console.log(error.message);
     }
+  };
+  const handleSignOut = () => {
+    signOut(auth).then((res) => {
+      console.log(res);
+    });
   };
 
   const getGeocordinateDest = async (value) => {
@@ -87,7 +94,7 @@ function useGetGeocod() {
     }
   };
 
-  return { handleClick, newDrop, newPickUp, loader };
+  return { handleClick, newDrop, newPickUp, loader, handleSignOut };
 }
 
 export default useGetGeocod;

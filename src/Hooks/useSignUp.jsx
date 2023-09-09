@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { CLIENT_ROUTHS } from "../constants/routes";
+import { useNavigate } from "react-router-dom";
 
 export const useSignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ export const useSignUp = () => {
     displayName: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [userImage, setUserImage] = useState();
 
@@ -22,13 +25,17 @@ export const useSignUp = () => {
       [name]: value,
     });
   };
-  const handleChangeFile = (e) => {
-    const files = e.target.files?.[0];
-    if (!files) return;
-    setUserImage(files);
-  };
+  // const handleChangeFile = (e) => {
+  //   const files = e.target.files?.[0];
+  //   if (!files) return;
+  //   setUserImage(files);
+  // };
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    console.log(userImage);
+    const files = event.target.files?.[0];
+    if (!files) return;
+    setUserImage(files);
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -84,10 +91,11 @@ export const useSignUp = () => {
         password: "",
       });
       toast.success("successful");
+      navigate(CLIENT_ROUTHS.signin);
     } catch (error) {
       toast.error("Error");
     }
   };
 
-  return { handleChange, handleChangeFile, handleSubmitForm, formData };
+  return { handleChange, handleSubmitForm, formData };
 };
