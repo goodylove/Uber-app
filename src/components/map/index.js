@@ -24,7 +24,7 @@ function Map({ pickup, dropoff }) {
         trafficIncidents: true,
       },
 
-      zoom: 8,
+      zoom: 4,
     });
     map.addControl(new tt.FullscreenControl());
 
@@ -52,6 +52,7 @@ function Map({ pickup, dropoff }) {
         })
         .then(function (response) {
           let geojson = response.toGeoJson();
+          console.log(geojson.features[0].properties.summary);
           map.addLayer({
             id: "route",
             type: "line",
@@ -61,14 +62,14 @@ function Map({ pickup, dropoff }) {
             },
             paint: {
               "line-color": "purple",
-              "line-width": 8,
+              "line-width": 4,
             },
           });
-          // const bounds = new mapServices.LngLatBounds();
-          // geojson.features[0].geometry.coordinates.forEach(function (point) {
-          //   bounds.extend(mapServices.LngLat.convert(point));
-          // });
-          // map.fitBounds(bounds, { padding: 20 });
+          const bounds = new tt.LngLatBounds(location);
+          geojson.features[0].geometry.coordinates.forEach(function (point) {
+            bounds.extend(tt.LngLat.convert(point));
+          });
+          map.fitBounds(bounds, { padding: 10 });
         });
     }
     return () => map.remove();
