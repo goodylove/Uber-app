@@ -28,20 +28,18 @@ export const useSignUp = () => {
   // };
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    const files = event.target.files?.[0];
-    // if (!files) return;
-    console.log(files, "ok");
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      const files = event.target.file.files?.[0];
       console.log(res);
 
-      const storageRef = ref(storage, `images/${userImage}`);
+      const storageRef = ref(storage, `images/${files.name}`);
 
-      const uploadTask = uploadBytesResumable(storageRef, userImage);
+      const uploadTask = uploadBytesResumable(storageRef, files);
 
       // Register three observers:
       // 1. 'state_changed' observer, called any time the state changes

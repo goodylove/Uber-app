@@ -69,7 +69,7 @@ export default function SignUp() {
               id="file"
               name="file"
               placeholder="add an avater"
-              className="  "
+              className=" "
               style={{ display: "none" }}
               accept="image/*"
             />

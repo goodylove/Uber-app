@@ -32,14 +32,17 @@ export default function Home() {
 
   return (
     <main className="h-screen  relative flex flex-col w-full ">
-      <nav className=" flex w-full px-9 justify-between absolute  z-50 top-0">
+      <nav className=" flex w-full px-9 justify-between absolute  z-50 top-2">
         <div>{Icons.bar()}</div>
-        <img
-          src={currentUser?.photoURL}
-          alt="user-profile"
-          className="rounded-full w-10 h-10 "
-          onClick={handleSignOut}
-        />
+        <div className="relative">
+          <img
+            src={currentUser?.photoURL}
+            alt="user-profile"
+            className="rounded-full w-10 h-10  object-cover cursor-pointer"
+            onClick={handleSignOut}
+          />
+          <span className="w-fit p-2 rounded-3xl bg-white">signout</span>
+        </div>
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />
 
