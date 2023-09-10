@@ -48,7 +48,7 @@ export default function SignUp() {
         <div className="flex flex-col">
           <label
             htmlFor="password"
-            className="text-white font-poppins text-[12px]"
+            className="text-white font-poppins text-[12px] "
           >
             password
           </label>
@@ -58,7 +58,7 @@ export default function SignUp() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="border-2 rounded-md  outline-none w-full"
+            className="border-2 rounded-md  outline-none w-full p-2"
           />
         </div>
         <div className="flex flex-col">

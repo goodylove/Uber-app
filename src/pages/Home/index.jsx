@@ -15,12 +15,11 @@ import ChooseRides from "./../../components/ChooseRide/index";
 
 export default function Home() {
   const { currentUser } = useContext(context);
-  console.log(currentUser);
 
   const { handleClick, newDrop, newPickUp, loader, handleSignOut } =
     useGetGeocod();
-
   const [reverse, setReverse] = useState(true);
+  const [mouseOver, setMouseOver] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,8 +39,14 @@ export default function Home() {
             alt="user-profile"
             className="rounded-full w-10 h-10  object-cover cursor-pointer"
             onClick={handleSignOut}
+            onMouseOver={() => setMouseOver(true)}
+            onMouseLeave={() => setMouseOver(false)}
           />
-          <span className="w-fit p-2 rounded-3xl bg-white">signout</span>
+          {mouseOver && (
+            <span className="w-fit p-2 flex items-center  rounded-md bg-purple  text-white  absolute  text-[10px] left-0">
+              signout
+            </span>
+          )}
         </div>
       </nav>
       <Map pickup={newPickUp} dropoff={newDrop} />

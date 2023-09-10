@@ -4,6 +4,7 @@ import React, { ChangeEvent, useState } from "react";
 import { auth } from "../firebase/index";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { CLIENT_ROUTHS } from "../constants/routes";
 export const useSignIn = () => {
   const [getData, setGetData] = useState({
     email: "",
@@ -26,6 +27,7 @@ export const useSignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, getData.email, getData.password);
       toast.success("successfully signed in");
+      navigate(CLIENT_ROUTHS.home);
     } catch (error) {
       setError(true);
       toast.error("please try  signing in");

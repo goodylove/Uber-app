@@ -17,7 +17,7 @@ function usePageWrapper() {
       navigate(CLIENT_ROUTHS.welcome);
     } else {
       if (isAuthPage && currentUser) {
-        navigate(CLIENT_ROUTHS.home);
+        navigate(CLIENT_ROUTHS.signin);
       }
     }
   }, [isAuthPage, currentUser]);

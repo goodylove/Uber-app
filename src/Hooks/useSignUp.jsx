@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
+import { CLIENT_ROUTHS } from "../constants/routes";
 
 export const useSignUp = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +15,7 @@ export const useSignUp = () => {
     password: "",
   });
 
-  const [userImage, setUserImage] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,10 +24,7 @@ export const useSignUp = () => {
       [name]: value,
     });
   };
-  // const handleChangeFile = (e) => {
-  //   setUserImage(files);
-  //   console.log(files);
-  // };
+
   const handleSubmitForm = async (event) => {
     event.preventDefault();
     try {
@@ -41,15 +40,9 @@ export const useSignUp = () => {
 
       const uploadTask = uploadBytesResumable(storageRef, files);
 
-      // Register three observers:
-      // 1. 'state_changed' observer, called any time the state changes
-      // 2. Error observer, called on failure
-      // 3. Completion observer, called on successful completion
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Observe state change events such as progress, pause, and resume
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
@@ -61,15 +54,11 @@ export const useSignUp = () => {
               console.log("Upload is running");
               break;
           }
-          // toast.loading("loading...");
         },
         (error) => {
-          // Handle unsuccessful uploads
           console.log(error);
         },
         () => {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             console.log("File available at", downloadURL);
             await updateProfile(res.user, {
@@ -79,6 +68,7 @@ export const useSignUp = () => {
           });
         }
       );
+      navigate(CLIENT_ROUTHS.signin);
       setFormData({
         email: "",
         displayName: "",
