@@ -576,9 +576,9 @@ const line = () => {
         d="M1.22803 1.70599V33.296"
         stroke="#C8C7CC"
         strokeWidth="2"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinejoin="round"
+        strokeLinejoin="round"
         strokeDasharray="4 4"
       />
     </svg>

@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 
 import { toast } from "react-hot-toast";
 
 import { auth } from "../firebase";
+
+import { setDoc, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "./../firebase/index";
+import { context } from "../components/Context";
+
 function useGetGeocod() {
   const [newPickUp, setNewPickUp] = useState(null);
   const [newDrop, setNewDrop] = useState(null);
   const myKey = process.env.REACT_APP_TOM_TOM_KEY;
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
+
+  const { currentUser } = useContext(context);
 
   const getGeocordinateLoction = async (value) => {
     try {
@@ -80,11 +87,28 @@ function useGetGeocod() {
     try {
       const pickUpLoaction = await getGeocordinateLoction(pickUp);
       const dropOffLOcation = await getGeocordinateDest(dropOff);
-      // console.log(newPickUp.lon, newPickUp.lat, newDrop.lon, newDrop.lat);
-      // setTimeout(() => {
-      //   calculateDistance(newPickUp.lon, newPickUp.lat, newDrop.lon, newDrop.lat);
-      // }, 2000);
+
       setLoader(true);
+
+      if (currentUser) {
+        console.log(currentUser);
+        const res = await getDoc(doc(db, "user", currentUser.uid));
+        if (!res.exists()) {
+          await setDoc(doc(db, "user", currentUser.uid), {
+            name: currentUser.displayName,
+            location: {
+              pickup: pickUp,
+              dropoff: dropOff,
+            },
+            discount: "",
+            price: "",
+            code: "",
+            data: serverTimestamp(),
+          });
+        }
+      } else {
+        console.log("user not found");
+      }
 
       e.target[0].value = "";
       e.target[1].value = "";
