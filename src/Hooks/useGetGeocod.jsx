@@ -90,25 +90,25 @@ function useGetGeocod() {
 
       setLoader(true);
 
-      if (currentUser) {
-        console.log(currentUser);
-        const res = await getDoc(doc(db, "user", currentUser.uid));
-        if (!res.exists()) {
-          await setDoc(doc(db, "user", currentUser.uid), {
-            name: currentUser.displayName,
-            location: {
-              pickup: pickUp,
-              dropoff: dropOff,
-            },
-            discount: "",
-            price: "",
-            code: "",
-            data: serverTimestamp(),
-          });
-        }
-      } else {
-        console.log("user not found");
-      }
+      // if (currentUser) {
+      //   console.log(currentUser);
+      //   const res = await getDoc(doc(db, "user", currentUser.uid));
+      //   if (!res.exists()) {
+      //     await setDoc(doc(db, "user", currentUser.uid), {
+      //       name: currentUser.displayName,
+      //       location: {
+      //         pickup: pickUp,
+      //         dropoff: dropOff,
+      //       },
+      //       discount: "",
+      //       price: "",
+      //       code: "",
+      //       data: serverTimestamp(),
+      //     });
+      //   }
+      // } else {
+      //   console.log("user not found");
+      // }
 
       e.target[0].value = "";
       e.target[1].value = "";

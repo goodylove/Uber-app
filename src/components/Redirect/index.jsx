@@ -9,6 +9,6 @@ export const Redirect = ({ path, redirectTo }) => {
   React.useEffect(() => {
     if (pathname !== path) return;
     navigate(redirectTo);
-  }, []);
+  }, [pathname, path]);
   return <Outlet />;
 };
