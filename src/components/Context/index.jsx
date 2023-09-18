@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "../../firebase";
@@ -7,16 +7,20 @@ export const context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      setLoading(false);
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        setLoading(true);
+      } else {
+        setLoading(false);
+      }
     });
 
     return () => unsub();
-  }, [currentUser]);
+  }, []);
 
   // console.log(currentUser);
 
