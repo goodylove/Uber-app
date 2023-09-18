@@ -40,7 +40,7 @@ export const useSignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, getData.email, getData.password);
       toast.success("successfully signed in");
-      // navigate(CLIENT_ROUTHS.home);
+      navigate(CLIENT_ROUTHS.home);
       setSuccess(true);
     } catch (error) {
       setError(true);

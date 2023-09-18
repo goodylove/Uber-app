@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import Button from "./../../../components/Button/index";
 
 export default function SignIn() {
+  const { handleSignIn, getData, handleChange, funForgettonPassword } =
+    useSignIn();
+
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
       <div>{Icons.Logo()}</div>

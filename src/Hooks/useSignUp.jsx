@@ -15,7 +15,7 @@ export const useSignUp = () => {
     password: "",
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
@@ -68,7 +68,7 @@ export const useSignUp = () => {
           });
         }
       );
-      // navigate(CLIENT_ROUTHS.signin);
+      navigate(CLIENT_ROUTHS.signin);
       setFormData({
         email: "",
         displayName: "",
