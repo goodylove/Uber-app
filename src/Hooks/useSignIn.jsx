@@ -25,18 +25,15 @@ export const useSignIn = () => {
     });
   };
 
-  const funForgettonPassword = () => {
-    sendPasswordResetEmail(auth, getData.email)
-      .then(() => {
-        console.log(" Password reset email sent!");
-        // ..
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+  const funForgettonPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, getData.email);
+      toast.success("Email was sent");
+    } catch (error) {
+      toast.error("Could not send reset email");
+    }
   };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
