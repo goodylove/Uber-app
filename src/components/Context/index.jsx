@@ -13,6 +13,7 @@ const ContextProvider = ({ children }) => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+
         setLoading(true);
       } else {
         setLoading(false);

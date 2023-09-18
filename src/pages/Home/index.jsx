@@ -22,79 +22,75 @@ export default function Home() {
   const [reverse, setReverse] = useState(true);
   const [mouseOver, setMouseOver] = useState(false);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setReverse(!loader);
-  //   }, 1000);
-  //   console.log("ok");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setReverse(!loader);
+    }, 1000);
+    console.log("ok");
 
-  //   return () => clearTimeout(timer);
-  // }, [reverse, loader]);
-
-  if (loading) {
-    return (
-      <div className="h-screen flex items-center  justify-center">
-        <Loader />
-      </div>
-    );
-  }
+    return () => clearTimeout(timer);
+  }, [reverse, loader]);
 
   return (
-    <main className="h-screen  relative flex flex-col w-full ">
-      <nav className=" flex w-full px-9 justify-between absolute  z-50 top-2">
-        <div>{Icons.bar()}</div>
-        <div className="relative">
-          <img
-            src={currentUser?.photoURL}
-            alt="user-profile"
-            className="rounded-full w-10 h-10  object-cover cursor-pointer"
-            onClick={handleSignOut}
-            onMouseOver={() => setMouseOver(true)}
-            onMouseLeave={() => setMouseOver(false)}
-          />
-          {mouseOver && (
-            <span className="w-fit p-2 flex items-center  rounded-md bg-purple  text-white  absolute  text-[10px] left-0">
-              signout
-            </span>
+    <>
+      {loading && (
+        <main className="h-screen  relative flex flex-col w-full ">
+          <nav className=" flex w-full px-9 justify-between absolute  z-50 top-2">
+            <div>{Icons.bar()}</div>
+            <div className="relative">
+              <img
+                src={currentUser?.photoURL}
+                alt="user-profile"
+                className="rounded-full w-10 h-10  object-cover cursor-pointer"
+                onClick={handleSignOut}
+                onMouseOver={() => setMouseOver(true)}
+                onMouseLeave={() => setMouseOver(false)}
+              />
+              {mouseOver && (
+                <span className="w-fit p-2 flex items-center  rounded-md bg-purple  text-white  absolute  text-[10px] left-0">
+                  signout
+                </span>
+              )}
+            </div>
+          </nav>
+          <Map pickup={newPickUp} dropoff={newDrop} />
+
+          {reverse && (
+            <div className="bg-black rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
+              <form
+                action=""
+                className=" flex  flex-col p-4 h-full  w-full justify-center "
+                onSubmit={handleClick}
+              >
+                <p className="m-3 text-white text-center text-2xl">
+                  Where are you going?
+                </p>
+                <input
+                  type="text"
+                  placeholder="Enter location"
+                  name="location"
+                  className="my-3 py-3 px-3 rounded-md outline-none"
+                />
+                <input
+                  type="text"
+                  placeholder="Enter Destination"
+                  className="my-3 py-3 rounded-md outline-none px-3"
+                  name="destination"
+                />
+                <Button
+                  className="bg-purple text-white py-3 rounded-md my-3"
+                  type="submit"
+                >
+                  {loader ? <Loader /> : "Next"}
+                </Button>
+                {/* <Loader /> */}
+              </form>
+            </div>
           )}
-        </div>
-      </nav>
-      <Map pickup={newPickUp} dropoff={newDrop} />
 
-      {reverse && (
-        <div className="bg-black rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
-          <form
-            action=""
-            className=" flex  flex-col p-4 h-full  w-full justify-center "
-            onSubmit={handleClick}
-          >
-            <p className="m-3 text-white text-center text-2xl">
-              Where are you going?
-            </p>
-            <input
-              type="text"
-              placeholder="Enter location"
-              name="location"
-              className="my-3 py-3 px-3 rounded-md outline-none"
-            />
-            <input
-              type="text"
-              placeholder="Enter Destination"
-              className="my-3 py-3 rounded-md outline-none px-3"
-              name="destination"
-            />
-            <Button
-              className="bg-purple text-white py-3 rounded-md my-3"
-              type="submit"
-            >
-              {loader ? <Loader /> : "Next"}
-            </Button>
-            {/* <Loader /> */}
-          </form>
-        </div>
+          {!reverse && <ChooseRides />}
+        </main>
       )}
-
-      {!reverse && <ChooseRides />}
-    </main>
+    </>
   );
 }
