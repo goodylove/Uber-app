@@ -5,6 +5,8 @@ import { auth } from "../firebase/index";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { CLIENT_ROUTHS } from "../constants/routes";
+import { sendPasswordResetEmail } from "firebase/auth";
+
 export const useSignIn = () => {
   const [getData, setGetData] = useState({
     email: "",
@@ -22,6 +24,19 @@ export const useSignIn = () => {
       [name]: value,
     });
   };
+
+  const funForgettonPassword = () => {
+    sendPasswordResetEmail(auth, getData.email)
+      .then(() => {
+        console.log(" Password reset email sent!");
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -33,5 +48,5 @@ export const useSignIn = () => {
       toast.error("please try  signing in");
     }
   };
-  return { handleSignIn, getData, handleChange };
+  return { handleSignIn, getData, handleChange, funForgettonPassword };
 };

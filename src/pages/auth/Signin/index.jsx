@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import Button from "./../../../components/Button/index";
 
 export default function SignIn() {
-  const { handleSignIn, getData, handleChange } = useSignIn();
+  const { handleSignIn, getData, handleChange, funForgettonPassword } =
+    useSignIn();
 
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
@@ -60,6 +61,12 @@ export default function SignIn() {
           Sign up
         </Link>
       </span>
+      <div
+        className="text-white my-4 underline    cursor-pointer"
+        onClick={funForgettonPassword}
+      >
+        forgotten password?
+      </div>
     </main>
   );
 }
