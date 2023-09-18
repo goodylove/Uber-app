@@ -7,16 +7,13 @@ export const context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
-
-        setLoading(true);
-      } else {
         setLoading(false);
+        // setCurrentUser(user);
       }
     });
 

@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Gallery from "../../../assets/gallery.png";
 import { Link } from "react-router-dom";
 import { useSignUp } from "../../../Hooks/useSignUp";
 import { Icons } from "../../../constants/icons";
 import { CLIENT_ROUTHS } from "../../../constants/routes";
 import Button from "./../../../components/Button/index";
+import { context } from "../../../components/Context";
 
 export default function SignUp() {
-  const { handleChange, handleSubmitForm, formData } = useSignUp();
+  const { handleChanges, handleSubmitForm, formData } = useContext(context);
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
       <div>{Icons.Logo()}</div>
@@ -25,7 +26,7 @@ export default function SignUp() {
             id="name"
             name="displayName"
             value={formData.displayName}
-            onChange={handleChange}
+            onChange={handleChanges}
             className="border-2 rounded-md p-2 outline-none w-full"
           />
         </div>
@@ -41,7 +42,7 @@ export default function SignUp() {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={handleChanges}
             className="border-2  outline-none w-full rounded-md p-2"
           />
         </div>
@@ -57,7 +58,7 @@ export default function SignUp() {
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={handleChanges}
             className="border-2 rounded-md  outline-none w-full p-2"
           />
         </div>

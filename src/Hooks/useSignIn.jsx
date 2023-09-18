@@ -14,6 +14,7 @@ export const useSignIn = () => {
   });
 
   const [error, setError] = React.useState(false);
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -39,11 +40,12 @@ export const useSignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, getData.email, getData.password);
       toast.success("successfully signed in");
-      navigate(CLIENT_ROUTHS.home);
+      // navigate(CLIENT_ROUTHS.home);
+      setSuccess(true);
     } catch (error) {
       setError(true);
       toast.error("please try  signing in");
     }
   };
-  return { handleSignIn, getData, handleChange, funForgettonPassword };
+  return { handleSignIn, getData, handleChange, funForgettonPassword, success };
 };
