@@ -1,8 +1,9 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { CLIENT_ROUTHS } from "../constants/routes";
 import useAuth from "./useAuth";
+import { useEffect } from "react";
 
 function usePageWrapper() {
   const { currentUser } = useAuth();
@@ -16,7 +17,8 @@ function usePageWrapper() {
       navigate(CLIENT_ROUTHS.welcome);
     } else {
       if (isAuthPage && currentUser) {
-        navigate(CLIENT_ROUTHS.signin);
+        console.log(currentUser);
+        navigate(CLIENT_ROUTHS.home);
       }
     }
   }, [isAuthPage, currentUser]);

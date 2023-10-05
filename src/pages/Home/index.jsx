@@ -13,17 +13,11 @@ import ChooseRides from "./../../components/ChooseRide/index";
 import useAuth from "../../Hooks/useAuth";
 
 export default function Home() {
-  const { handleClick, newDrop, newPickUp, loader } = useGetGeocod();
+  const { handleClick, newDrop, newPickUp, loader, reverse } = useGetGeocod();
 
   const { currentUser, loading, handleSignOut } = useAuth();
-  const [reverse, setReverse] = useState(true);
-  const [mouseOver, setMouseOver] = useState(false);
 
-  const handleLocationChange = function () {
-    if (newDrop && newPickUp) {
-      setReverse(false);
-    }
-  };
+  const [mouseOver, setMouseOver] = useState(false);
 
   return (
     <>
@@ -74,7 +68,6 @@ export default function Home() {
                 <Button
                   className="bg-purple text-white py-3 rounded-md my-3"
                   type="submit"
-                  onClick={handleLocationChange}
                 >
                   {loader ? <Loader /> : "Next"}
                 </Button>

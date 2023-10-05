@@ -16,6 +16,7 @@ function useGetGeocod() {
   const myKey = process.env.REACT_APP_TOM_TOM_KEY;
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [reverse, setReverse] = useState(true);
 
   const { currentUser } = useAuth();
 
@@ -85,6 +86,7 @@ function useGetGeocod() {
       const dropOffLOcation = await getGeocordinateDest(dropOff);
 
       setLoader(true);
+      setReverse(false);
 
       // if (currentUser) {
       //   console.log(currentUser);
