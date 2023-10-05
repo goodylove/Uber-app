@@ -8,6 +8,7 @@ import { auth } from "../firebase";
 import { setDoc, doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./../firebase/index";
 import { context } from "../components/Context";
+import useAuth from "./useAuth";
 
 function useGetGeocod() {
   const [newPickUp, setNewPickUp] = useState(null);
@@ -16,7 +17,7 @@ function useGetGeocod() {
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
 
-  const { currentUser } = useContext(context);
+  const { currentUser } = useAuth();
 
   const getGeocordinateLoction = async (value) => {
     try {

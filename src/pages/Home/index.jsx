@@ -11,25 +11,15 @@ import { context } from "../../components/Context";
 import Loader from "./../../components/Loader/index";
 import "../../App.css";
 import ChooseRides from "./../../components/ChooseRide/index";
+import useAuth from "../../Hooks/useAuth";
 
 export default function Home() {
   const { handleClick, newDrop, newPickUp, loader, handleSignOut } =
     useGetGeocod();
 
-  const { currentUser, loading } = useContext(context);
-  console.log(currentUser, loading);
-
+  const { currentUser, loading } = useAuth();
   const [reverse, setReverse] = useState(true);
   const [mouseOver, setMouseOver] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setReverse(!loader);
-    }, 1000);
-    console.log("ok");
-
-    return () => clearTimeout(timer);
-  }, [reverse, loader]);
 
   return (
     <>
