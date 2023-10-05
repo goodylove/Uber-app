@@ -1,12 +1,11 @@
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { CLIENT_ROUTHS } from "../constants/routes";
-import { context } from "./../components/Context/index";
+import useAuth from "./useAuth";
 
 function usePageWrapper() {
-  const { currentUser } = React.useContext(context);
-
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -22,9 +21,9 @@ function usePageWrapper() {
     }
   }, [isAuthPage, currentUser]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleRedirect();
-  }, [handleRedirect]);
+  }, [handleRedirect, currentUser]);
 }
 
 export default usePageWrapper;

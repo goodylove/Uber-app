@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { CLIENT_ROUTHS } from "../constants/routes";
 import { sendPasswordResetEmail } from "firebase/auth";
+import useAuth from "./useAuth";
 
 export const useSignIn = () => {
   const [getData, setGetData] = useState({
@@ -15,6 +16,7 @@ export const useSignIn = () => {
 
   const [error, setError] = React.useState(false);
   const [success, setSuccess] = useState(false);
+  const { handleSignIn, funForgettonPassword } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,26 +28,16 @@ export const useSignIn = () => {
     });
   };
 
-  const funForgettonPassword = async () => {
-    try {
-      await sendPasswordResetEmail(auth, getData.email);
-      toast.success("Email was sent");
-    } catch (error) {
-      toast.error("Could not send reset email");
-    }
+  const forgottenPassword = async function (getData) {
+    await funForgettonPassword(getData.email);
+  };
+  const loginFunc = async function (e) {
+    e.preventDefault();
+    await handleSignIn(getData.email, getData.password);
+
+    navigate(CLIENT_ROUTHS.home);
+    setSuccess(true);
   };
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, getData.email, getData.password);
-      toast.success("successfully signed in");
-      navigate(CLIENT_ROUTHS.home);
-      setSuccess(true);
-    } catch (error) {
-      setError(true);
-      toast.error("please try  signing in");
-    }
-  };
-  return { handleSignIn, getData, handleChange, funForgettonPassword, success };
+  return { getData, handleChange, success, loginFunc, forgottenPassword };
 };

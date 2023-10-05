@@ -7,19 +7,23 @@ import Map from "../../components/map";
 import useGetGeocod from "./../../Hooks/useGetGeocod";
 import { Icons } from "../../constants/icons";
 
-import { context } from "../../components/Context";
 import Loader from "./../../components/Loader/index";
 import "../../App.css";
 import ChooseRides from "./../../components/ChooseRide/index";
 import useAuth from "../../Hooks/useAuth";
 
 export default function Home() {
-  const { handleClick, newDrop, newPickUp, loader, handleSignOut } =
-    useGetGeocod();
+  const { handleClick, newDrop, newPickUp, loader } = useGetGeocod();
 
-  const { currentUser, loading } = useAuth();
+  const { currentUser, loading, handleSignOut } = useAuth();
   const [reverse, setReverse] = useState(true);
   const [mouseOver, setMouseOver] = useState(false);
+
+  const handleLocationChange = function () {
+    if (newDrop && newPickUp) {
+      setReverse(false);
+    }
+  };
 
   return (
     <>
@@ -70,6 +74,7 @@ export default function Home() {
                 <Button
                   className="bg-purple text-white py-3 rounded-md my-3"
                   type="submit"
+                  onClick={handleLocationChange}
                 >
                   {loader ? <Loader /> : "Next"}
                 </Button>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { auth, storage } from "../firebase";
+import { storage } from "../firebase";
 import toast from "react-hot-toast";
 
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ROUTHS } from "../constants/routes";
@@ -32,6 +32,7 @@ export const useSignUp = () => {
     const res = await handleSubmitForm(formData.email, formData.password);
 
     const files = event.target.file.files?.[0];
+    console.log(files);
 
     const storageRef = ref(storage, `images/${files.name}`);
 
@@ -58,7 +59,7 @@ export const useSignUp = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           console.log("File available at", downloadURL);
-          await updateProfile(res.user, {
+          await updateProfile(res?.user, {
             photoURL: downloadURL,
             displayName: res.user.displayName,
           });

@@ -7,15 +7,14 @@ import { Link } from "react-router-dom";
 import Button from "./../../../components/Button/index";
 
 export default function SignIn() {
-  const { handleSignIn, getData, handleChange, funForgettonPassword } =
-    useSignIn();
+  const { loginFunc, getData, handleChange, forgottenPassword } = useSignIn();
 
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
       <div>{Icons.Logo()}</div>
       <form
         action=""
-        onSubmit={handleSignIn}
+        onSubmit={loginFunc}
         className="flex flex-col gap-3 md:w-2/5 w-full  p-5 rounded-md shadow-lg justify-center"
       >
         <div className="flex flex-col">
@@ -63,7 +62,7 @@ export default function SignIn() {
       </span>
       <div
         className="text-white my-4 underline    cursor-pointer"
-        onClick={funForgettonPassword}
+        onClick={forgottenPassword}
       >
         forgotten password?
       </div>

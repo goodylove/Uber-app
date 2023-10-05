@@ -20,27 +20,51 @@ export const ROUTER = createBrowserRouter([
     children: [
       {
         path: CLIENT_ROUTHS.home,
-        element: <Home />,
+        element: (
+          <PageWrapper>
+            <Home />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.promopage,
-        element: <PromoPage />,
+        element: (
+          <PageWrapper>
+            <PromoPage />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.paymentpage,
-        element: <PaymentPage />,
+        element: (
+          <PageWrapper>
+            <PaymentPage />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.cancelbooking,
-        element: <CancelBooking />,
+        element: (
+          <PageWrapper>
+            <CancelBooking />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.trip,
-        element: <Trip />,
+        element: (
+          <PageWrapper>
+            <Trip />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.success,
-        element: <Success />,
+        element: (
+          <PageWrapper>
+            <Success />
+          </PageWrapper>
+        ),
       },
     ],
   },
@@ -53,15 +77,27 @@ export const ROUTER = createBrowserRouter([
       {
         path: CLIENT_ROUTHS.welcome,
 
-        element: <Welcome />,
+        element: (
+          <PageWrapper>
+            <Welcome />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.signup,
-        element: <SignUp />,
+        element: (
+          <PageWrapper>
+            <SignUp />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTHS.signin,
-        element: <SignIn />,
+        element: (
+          <PageWrapper>
+            <SignIn />
+          </PageWrapper>
+        ),
       },
     ],
   },

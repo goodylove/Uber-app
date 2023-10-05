@@ -34,11 +34,6 @@ function useGetGeocod() {
       console.log(error.message);
     }
   };
-  const handleSignOut = () => {
-    signOut(auth).then((res) => {
-      console.log(res);
-    });
-  };
 
   const getGeocordinateDest = async (value) => {
     try {
@@ -119,7 +114,7 @@ function useGetGeocod() {
     }
   };
 
-  return { handleClick, newDrop, newPickUp, loader, handleSignOut };
+  return { handleClick, newDrop, newPickUp, loader };
 }
 
 export default useGetGeocod;

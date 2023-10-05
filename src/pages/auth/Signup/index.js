@@ -64,6 +64,24 @@ export default function SignUp() {
             className="border-2 rounded-md  outline-none w-full p-2"
           />
         </div>
+        <div>
+          <label
+            htmlFor="file"
+            className="flex items-center gap-3 text-gray-500"
+          >
+            <img src={Gallery} alt="" className="w-10 h-10 cursor-pointer" />
+            <input
+              type="file"
+              id="file"
+              name="file"
+              placeholder="add an avater"
+              className=" "
+              style={{ display: "none" }}
+              accept="image/*"
+            />
+            <span className="text-sm text-white ">Add an avatar</span>
+          </label>
+        </div>
 
         <Button className=" font-poppins text-white bg-black rounded-md shadow-lg p-2">
           Sign Up
