@@ -7,8 +7,14 @@ import "../../App.css";
 function App() {
   return (
     <>
-      <Toaster position="top-right" />
-      <RouterProvider router={ROUTER} />
+      {window.innerWidth < 768 ? (
+        <>
+          <Toaster position="top-right" />
+          <RouterProvider router={ROUTER} />{" "}
+        </>
+      ) : (
+        "not avaliable in desktop device"
+      )}
     </>
   );
 }
