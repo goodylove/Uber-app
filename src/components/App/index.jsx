@@ -35,16 +35,8 @@ function App() {
     );
   return (
     <>
-      {device.width < 768 ? (
-        <>
-          <Toaster position="top-right" />
-          <RouterProvider router={ROUTER} />
-        </>
-      ) : (
-        <div className="text-[40px] h-screen flex items-center justify-center">
-          <p> Not Avaliable in Desktop Device for Now</p>
-        </div>
-      )}
+      <Toaster position="top-right" />
+      <RouterProvider router={ROUTER} />
     </>
   );
 }
