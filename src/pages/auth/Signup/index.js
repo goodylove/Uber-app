@@ -8,6 +8,7 @@ import Button from "./../../../components/Button/index";
 
 export default function SignUp() {
   const { handleChanges, signUpFunc, formData } = useSignUp();
+
   return (
     <main className="flex h-screen bg-purple items-center justify-center flex-col p-3">
       <div>{Icons.Logo()}</div>
@@ -83,7 +84,10 @@ export default function SignUp() {
           </label>
         </div>
 
-        <Button className=" font-poppins text-white bg-black rounded-md shadow-lg p-2">
+        <Button
+          type="submit"
+          className=" font-poppins text-white bg-black rounded-md shadow-lg p-2"
+        >
           Sign Up
         </Button>
       </form>

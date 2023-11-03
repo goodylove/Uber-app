@@ -10,13 +10,13 @@ import { CLIENT_ROUTHS } from "../constants/routes";
 import useAuth from "./useAuth";
 
 export const useSignUp = () => {
+  const { handleSubmitForm, currentUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     displayName: "",
     password: "",
   });
-  console.log(formData.displayName, formData.email, formData.password);
-  const { handleSubmitForm } = useAuth();
+  // console.log(formData.displayName, formData.email, formData.password);
 
   const navigate = useNavigate();
 
@@ -27,11 +27,19 @@ export const useSignUp = () => {
       [e.target.name]: value,
     });
   };
+
   const signUpFunc = async (event) => {
     event.preventDefault();
+
+    if (formData.email === "" || formData.password === "") {
+      return toast.error("please enter your email");
+    }
+
     const res = await handleSubmitForm(formData.email, formData.password);
+    console.log(res.user);
 
     const files = event.target.file.files?.[0];
+    // console.log(currentUser);
     console.log(files);
 
     const storageRef = ref(storage, `images/${files.name}`);
@@ -61,12 +69,12 @@ export const useSignUp = () => {
           console.log("File available at", downloadURL);
           await updateProfile(res?.user, {
             photoURL: downloadURL,
-            displayName: res.user.displayName,
+            displayName: res?.user?.displayName,
           });
         });
       }
     );
-    navigate(CLIENT_ROUTHS.signin);
+    navigate(CLIENT_ROUTHS.home);
     setFormData({
       email: "",
       displayName: "",
