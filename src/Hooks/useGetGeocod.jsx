@@ -86,7 +86,6 @@ function useGetGeocod() {
       const dropOffLOcation = await getGeocordinateDest(dropOff);
 
       setLoader(true);
-      setReverse(false);
 
       // if (currentUser) {
       //   console.log(currentUser);
@@ -110,13 +109,14 @@ function useGetGeocod() {
 
       e.target[0].value = "";
       e.target[1].value = "";
+      setReverse(false);
     } catch (error) {
       console.log("Erorr", error);
       setLoader(false);
     }
   };
 
-  return { handleClick, newDrop, newPickUp, loader };
+  return { handleClick, newDrop, newPickUp, loader, reverse };
 }
 
 export default useGetGeocod;

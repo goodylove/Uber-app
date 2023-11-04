@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import { auth } from "../../firebase";
 import toast from "react-hot-toast";
@@ -15,23 +16,27 @@ export const context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  console.log(currentUser);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoading(true);
+        console.log(user, currentUser, "yeee");
         setCurrentUser(user);
       }
     });
 
     return () => unsub();
-  }, []);
+  }, [currentUser]);
 
   const handleSubmitForm = async (email, password) => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      setCurrentUser(res.user);
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(user.user, currentUser, email, password);
+      setCurrentUser(user.user);
+      return user;
     } catch (error) {
       console.log("Error: " + error);
       toast.error("Error");
@@ -41,7 +46,8 @@ const ContextProvider = ({ children }) => {
   const handleSignIn = async (email, password) => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      setCurrentUser(user.user);
+      setCurrentUser(user?.user);
+      console.log(user);
       toast.success("successfully signed in");
     } catch (error) {
       toast.error("please try  signing in");

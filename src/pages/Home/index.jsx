@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       {loading && (
-        <main className="h-screen  relative flex flex-col w-full ">
+        <main className="h-screen  relative flex xl:flex-row flex-col w-full   justify-center">
           <nav className=" flex w-full px-9 justify-between absolute  z-50 top-2">
             <div>{Icons.bar()}</div>
             <div className="relative">
@@ -43,40 +43,42 @@ export default function Home() {
           </nav>
           <Map pickup={newPickUp} dropoff={newDrop} />
 
-          {reverse && (
-            <div className="bg-black rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50 ">
-              <form
-                action=""
-                className=" flex  flex-col p-4 h-full  w-full justify-center "
-                onSubmit={handleClick}
-              >
-                <p className="m-3 text-white text-center text-2xl">
-                  Where are you going?
-                </p>
-                <input
-                  type="text"
-                  placeholder="Enter location"
-                  name="location"
-                  className="my-3 py-3 px-3 rounded-md outline-none"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Destination"
-                  className="my-3 py-3 rounded-md outline-none px-3"
-                  name="destination"
-                />
-                <Button
-                  className="bg-purple text-white py-3 rounded-md my-3"
-                  type="submit"
+          <>
+            {reverse && (
+              <div className="bg-black rounded-t-xl  flex-1  items-center  fixed bottom-0 w-full z-50  ">
+                <form
+                  action=""
+                  className=" flex  flex-col p-4 h-full  w-full justify-center "
+                  onSubmit={handleClick}
                 >
-                  {loader ? <Loader /> : "Next"}
-                </Button>
-                {/* <Loader /> */}
-              </form>
-            </div>
-          )}
+                  <p className="m-3 text-white text-center text-2xl">
+                    Where are you going?
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="Enter location"
+                    name="location"
+                    className="my-3 py-3 px-3 rounded-md outline-none"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Destination"
+                    className="my-3 py-3 rounded-md outline-none px-3"
+                    name="destination"
+                  />
+                  <Button
+                    className="bg-purple text-white py-3 rounded-md my-3"
+                    type="submit"
+                  >
+                    {loader ? <Loader /> : "Next"}
+                  </Button>
+                  {/* <Loader /> */}
+                </form>
+              </div>
+            )}
 
-          {!reverse && <ChooseRides />}
+            {!reverse && <ChooseRides />}
+          </>
         </main>
       )}
     </>

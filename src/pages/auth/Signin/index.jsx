@@ -50,7 +50,10 @@ export default function SignIn() {
           />
         </div>
 
-        <Button className=" font-poppins text-white bg-black rounded-md shadow-lg p-2">
+        <Button
+          type="submit"
+          className=" font-poppins text-white bg-black rounded-md shadow-lg p-2"
+        >
           Login
         </Button>
       </form>
